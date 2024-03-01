@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "954226465784",
+    "project_id": "konek-mobile",
+    "storage_bucket": "konek-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954226465784:android:9946d179983e11c8a7d40d",
+        "android_client_info": {
+          "package_name": "com.alamsyah.konek_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "954226465784-5vn80cq6qsfrs4vk8p3kqjqrjtr71a59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alamsyah.konek_mobile",
+            "certificate_hash": "04a587efac94e7b589f67a93d3a738c134d2a3ef"
+          }
+        },
+        {
+          "client_id": "954226465784-8b9se7uc1d4uq87tg66b5tlgo0i4ifne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz3i0xhA_Ll26huZba6aWeIfKoVh4GDJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "954226465784-8b9se7uc1d4uq87tg66b5tlgo0i4ifne.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "954226465784-johoebs24s9f1m09o69ho6auk7gpofdu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alamsyah.konekMobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
