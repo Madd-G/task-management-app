@@ -19,4 +19,17 @@ class UserAPI {
       return UserEntity();
     }
   }
+
+  static Future<List<UserEntity>> getEmployees() async {
+    try {
+      var response = await HttpUtil().get('getEmployeeNameRole');
+      final List<dynamic> data = response;
+      print('data: $data');
+      print('data type: ${data.runtimeType}');
+      return data.map((item) => UserEntity.fromJson(item)).toList();
+    } catch (error) {
+      print('Error occurred: $error');
+      throw Exception('Failed to load employees');
+    }
+  }
 }

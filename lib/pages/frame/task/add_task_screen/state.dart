@@ -1,3 +1,6 @@
+import 'package:get/get.dart';
+import 'package:konek_mobile/common/entities/entities.dart';
+
 class AddTaskState {
   AddTaskState();
 
@@ -26,4 +29,20 @@ class AddTaskState {
       "value": "qualitative",
     },
   ];
+
+  RxList employeeList = [].obs;
+
+// final List<Map<String, String>> employeeList = [
+//   {
+//     "label": "Lina",
+//     "value": "Lina",
+//   },
+//   {
+//     "label": "Lionel",
+//     "value": "Lionel",
+//   }, {
+//     "label": "Rachel",
+//     "value": "Rachel",
+//   },
+// ];
 }

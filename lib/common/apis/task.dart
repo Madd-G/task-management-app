@@ -1,12 +1,12 @@
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/utils/utils.dart';
 
-class ProductAPI {
-  static void addProductTask({
+class TaskAPI {
+  static void addTask({
     Task? params,
   }) async {
     await HttpUtil().post(
-      'addProductTask',
+      'addTask',
       data: params?.toJson(),
     );
   }

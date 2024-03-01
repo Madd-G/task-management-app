@@ -8,6 +8,8 @@ class Task {
   DateTime? startDate;
   DateTime? endDate;
   String? status;
+  String? assignee;
+  String? target;
 
   // final DateTime createdAt;
   // final DateTime updatedAt;
@@ -20,6 +22,8 @@ class Task {
     this.startDate,
     this.endDate,
     this.status,
+    this.assignee,
+    this.target,
     // required this.createdAt,
     // required this.updatedAt,
   });
@@ -33,6 +37,8 @@ class Task {
       'start_date': _formatDateTime(startDate),
       'end_date': _formatDateTime(endDate),
       'status': status,
+      'assignee': assignee,
+      'target': target
     };
   }
 
@@ -46,6 +52,8 @@ class Task {
       startDate: (data['start_date'] as Timestamp).toDate(),
       endDate: (data['end_date'] as Timestamp).toDate(),
       status: data['status'] ?? '',
+      assignee: data['assignee'] ?? '',
+      target: data['target'] ?? '',
       // createdAt: (data['created_at'] as Timestamp).toDate(),
       // updatedAt: (data['updated_at'] as Timestamp).toDate(),
     );

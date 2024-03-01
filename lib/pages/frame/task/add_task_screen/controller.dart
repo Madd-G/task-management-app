@@ -10,10 +10,23 @@ class AddTaskController extends GetxController {
   final nameController = TextEditingController();
   final weightController = TextEditingController();
   final addCompanyFormKey = GlobalKey<FormState>();
-  RxString status = 'To Do'.obs;
-  RxString category = 'Quantitative'.obs;
+  RxString status = 'Status'.obs;
+  RxString category = 'Category'.obs;
+  RxString employeeName = 'Employee'.obs;
+  RxString employeeRole = ''.obs;
   Rx<DateTime>? startDate = DateTime.now().obs;
   Rx<DateTime>? endDate = DateTime.now().obs;
+
+  @override
+  void onInit() {
+    getEmployee();
+    super.onInit();
+  }
+
+  Future<void> getEmployee() async {
+    state.employeeList.value =  await UserAPI.getEmployees();
+    print('state.employeeList.value: ${state.employeeList}');
+  }
 
   @override
   void onClose() {
@@ -22,8 +35,8 @@ class AddTaskController extends GetxController {
     super.onClose();
   }
 
-  void addProductTask(Task product) {
-    ProductAPI.addProductTask(params: product);
+  void addTask(Task product) {
+    TaskAPI.addTask(params: product);
     Get.back();
   }
 
@@ -42,7 +55,6 @@ class AddTaskController extends GetxController {
         } else if (date == "end date") {
           endDate?.value = dateTime;
           print('endDate?.value: ${endDate?.value}');
-
         }
         update();
       },
