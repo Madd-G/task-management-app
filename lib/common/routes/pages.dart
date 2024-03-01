@@ -3,22 +3,20 @@ import 'package:get/get.dart';
 import 'package:konek_mobile/common/middlewares/middlewares.dart';
 import 'package:konek_mobile/common/widgets/bottom_nav_bar.dart';
 import 'package:konek_mobile/pages/auth/sign_in/index.dart';
-import 'package:konek_mobile/pages/frame/home/index.dart';
-import 'package:konek_mobile/pages/frame/product/add_product_task_screen/index.dart';
-import 'package:konek_mobile/pages/frame/product/index.dart';
+import 'package:konek_mobile/pages/frame/task/add_task_screen/index.dart';
+import 'package:konek_mobile/pages/frame/task/index.dart';
 import 'package:konek_mobile/pages/frame/welcome/index.dart';
 import 'routes.dart';
 
 class AppPages {
-  static const INITIAL = AppRoutes.INITIAL;
-  static const HOME = AppRoutes.HOME;
+  static const INITIAL = AppRoutes.TASK;
   static const BOTTOM_NAV_BAR = AppRoutes.BOTTOM_NAV_BAR;
   static final RouteObserver<Route> observer = RouteObservers();
   static List<String> history = [];
 
   static final List<GetPage> routes = [
     GetPage(
-      name: AppRoutes.INITIAL,
+      name: AppRoutes.TASK,
       page: () => const WelcomePage(),
       binding: WelcomeBinding(),
     ),
@@ -36,19 +34,14 @@ class AppPages {
       binding: SignInBinding(),
     ),
     GetPage(
-      name: AppRoutes.HOME,
-      page: () => const HomePage(),
-      binding: HomeBinding(),
+      name: AppRoutes.TASK,
+      page: () => const TaskPage(),
+      binding: TaskBinding(),
     ),
     GetPage(
-      name: AppRoutes.PRODUCT,
-      page: () => const ProductPage(),
-      binding: ProductBinding(),
-    ),
-    GetPage(
-      name: AppRoutes.ADD_PRODUCT_TASK,
-      page: () => const AddProductTaskPage(),
-      binding: AddProductTaskBinding(),
+      name: AppRoutes.ADD_TASK,
+      page: () => const AddTaskPage(),
+      binding: AddTaskBinding(),
     ),
   ];
 }

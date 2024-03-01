@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:konek_mobile/common/apis/business_profile.dart';
+import 'package:konek_mobile/common/store/store.dart';
 import 'package:konek_mobile/common/widgets/widgets.dart';
 import 'index.dart';
 
@@ -64,6 +66,12 @@ class ProfileController extends GetxController {
     } else {
       toastInfo(msg: "image error");
     }
+  }
+
+
+  goLogout() async {
+    await GoogleSignIn().signOut();
+    await UserStore.to.onLogout();
   }
 
   @override

@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/routes/routes.dart';
 import 'package:konek_mobile/common/widgets/widgets.dart';
-import 'package:konek_mobile/pages/frame/product/controller.dart';
+import 'index.dart';
 
-class ProductPage extends GetView<ProductController> {
-  const ProductPage({super.key});
+class TaskPage extends GetView<TaskController> {
+  const TaskPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,17 +15,17 @@ class ProductPage extends GetView<ProductController> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Product List'),
+        title: const Text('Task List'),
         actions: [
           TextButton(
               onPressed: () {
-                Get.toNamed(AppRoutes.ADD_PRODUCT_TASK);
+                Get.toNamed(AppRoutes.ADD_TASK);
               },
               child: const Text('Add task')),
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('product').snapshots(),
+        stream: FirebaseFirestore.instance.collection('task').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -37,7 +37,7 @@ class ProductPage extends GetView<ProductController> {
             );
           } else {
             final products = snapshot.data!.docs
-                .map((doc) => Product.fromSnapshot(doc))
+                .map((doc) => Task.fromSnapshot(doc))
                 .toList();
             return ListView.builder(
               itemCount: products.length,

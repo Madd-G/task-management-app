@@ -1,8 +1,7 @@
-class AddProductTaskState {
-  AddProductTaskState();
+class AddTaskState {
+  AddTaskState();
 
-
-  static final List<Map<String, String>> statusList = [
+  final List<Map<String, String>> statusList = [
     {
       "label": "To Do",
       "value": "to do",
@@ -17,7 +16,7 @@ class AddProductTaskState {
     },
   ];
 
-  static final List<Map<String, String>> categoryList = [
+  final List<Map<String, String>> categoryList = [
     {
       "label": "Quantitative",
       "value": "quantitative",

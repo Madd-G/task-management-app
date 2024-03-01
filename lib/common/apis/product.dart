@@ -3,7 +3,7 @@ import 'package:konek_mobile/common/utils/utils.dart';
 
 class ProductAPI {
   static void addProductTask({
-    Product? params,
+    Task? params,
   }) async {
     await HttpUtil().post(
       'addProductTask',

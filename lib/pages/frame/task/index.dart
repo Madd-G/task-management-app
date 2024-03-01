@@ -1,4 +1,4 @@
-library product;
+library task;
 
 export 'binding.dart';
 export 'controller.dart';

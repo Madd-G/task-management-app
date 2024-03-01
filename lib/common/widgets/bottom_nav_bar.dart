@@ -4,21 +4,18 @@ import 'package:get/get.dart';
 import 'package:konek_mobile/common/res/media_res.dart';
 import 'package:konek_mobile/common/routes/routes.dart';
 import 'package:konek_mobile/common/style/color.dart';
-import 'package:konek_mobile/pages/frame/home/index.dart';
-import 'package:konek_mobile/pages/frame/product/index.dart';
 import 'package:konek_mobile/pages/frame/profile/index.dart';
+import 'package:konek_mobile/pages/frame/task/index.dart';
 
 class BottomNavBar extends GetView<BottomNavBarController> {
   const BottomNavBar({super.key});
 
   static const List<String> _activeIcons = [
     MediaRes.homeFilled,
-    MediaRes.homeFilled,
     MediaRes.userFilled,
   ];
 
   static const List<String> _inActiveIcons = [
-    MediaRes.home,
     MediaRes.home,
     MediaRes.user,
   ];
@@ -28,7 +25,7 @@ class BottomNavBar extends GetView<BottomNavBarController> {
     return Scaffold(
       body: Navigator(
         key: Get.nestedKey(1),
-        initialRoute: AppPages.HOME,
+        initialRoute: AppPages.INITIAL,
         onGenerateRoute: controller.onGenerateRoute,
       ),
       bottomNavigationBar: Obx(
@@ -39,7 +36,7 @@ class BottomNavBar extends GetView<BottomNavBarController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(
-              3,
+              2,
               (index) {
                 bool isActive = controller.state.selectedIndex.value == index;
                 return GestureDetector(
@@ -98,19 +95,11 @@ class BottomNavBarController extends GetxController {
   }
 
   Route? onGenerateRoute(RouteSettings settings) {
-    if (settings.name == AppRoutes.HOME) {
+    if (settings.name == AppRoutes.TASK) {
       return GetPageRoute(
         settings: settings,
-        page: () => const HomePage(),
-        binding: HomeBinding(),
-      );
-    }
-
-    if (settings.name == AppRoutes.PRODUCT) {
-      return GetPageRoute(
-        settings: settings,
-        page: () => ProductPage(),
-        binding: ProductBinding(),
+        page: () => const TaskPage(),
+        binding: TaskBinding(),
       );
     }
     if (settings.name == AppRoutes.PROFILE) {
@@ -135,8 +124,7 @@ class BottomNavBarBinding extends Bindings {
 class BottomNavBarState {
   var selectedIndex = 0.obs;
   final pages = <String>[
-    AppRoutes.HOME,
-    AppRoutes.PRODUCT,
+    AppRoutes.TASK,
     AppRoutes.PROFILE,
   ];
 }

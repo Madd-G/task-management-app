@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Product {
+class Task {
   String? id;
   String? name;
   String? category;
@@ -12,7 +12,7 @@ class Product {
   // final DateTime createdAt;
   // final DateTime updatedAt;
 
-  Product({
+  Task({
     this.id,
     this.name,
     this.category,
@@ -36,9 +36,9 @@ class Product {
     };
   }
 
-  factory Product.fromSnapshot(DocumentSnapshot snapshot) {
+  factory Task.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-    return Product(
+    return Task(
       id: data['id'],
       name: data['name'] ?? '',
       category: data['category'] ?? '',

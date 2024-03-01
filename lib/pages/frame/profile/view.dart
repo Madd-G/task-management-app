@@ -10,7 +10,7 @@ import 'package:konek_mobile/pages/frame/profile/controller.dart';
 import 'package:konek_mobile/pages/frame/profile/widgets/widgets.dart';
 
 class ProfilePage extends GetView<ProfileController> {
-   const ProfilePage({super.key});
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +46,15 @@ class ProfilePage extends GetView<ProfileController> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 30.0),
                     // netImageCached(data.businessLogo!, width: 150.0, height: 150.0),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                          onPressed: () {
+                            controller.goLogout();
+                          },
+                          icon: const Icon(Icons.logout)),
+                    ),
                     Stack(
                       alignment: Alignment.center,
                       children: [

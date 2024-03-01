@@ -1,4 +1,4 @@
-library add_product_task;
+library add_task;
 
 export 'binding.dart';
 export 'controller.dart';
