@@ -16,6 +16,13 @@ class BusinessProfileAPI {
     return BusinessProfile.fromJson(response);
   }
 
+  static Future<BusinessProfile> updateValue(BusinessProfile name) async {
+    print('name.toJsonUpdateValue(): ${name.toJsonUpdateValue()}');
+    var response = await HttpUtil()
+        .post('updateBusinessValue', data: name.toJsonUpdateValue());
+    return BusinessProfile.fromJson(response);
+  }
+
   static Future<BaseResponseEntity> uploadImage({File? file}) async {
     String fileName = file!.path.split('/').last;
 
@@ -30,5 +37,18 @@ class BusinessProfileAPI {
       data: data,
     );
     return BaseResponseEntity.fromJson(response);
+  }
+
+  static Future<void> addBusinessSector(BusinessProfile name) async {
+    print('name ya: ${name.toJsonAddBusinessSector()}');
+    await HttpUtil().post('addBusinessSector', data: name.toJsonAddBusinessSector());
+  }
+
+  static void deleteBusinessSector({
+    required int index,
+  }) async {
+    await HttpUtil().delete(
+      'deleteBusinessSector?index=$index',
+    );
   }
 }

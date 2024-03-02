@@ -3,12 +3,14 @@ class BusinessProfile {
   String? businessName;
   List<String>? businessSector;
   String? businessValue;
+  String? singleSector;
 
   BusinessProfile({
     this.businessLogo,
     this.businessName,
     this.businessSector,
     this.businessValue,
+    this.singleSector,
   });
 
   factory BusinessProfile.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,18 @@ class BusinessProfile {
   Map<String, dynamic> toJsonUpdateName() {
     return {
       'business_name': businessName,
+    };
+  }
+
+  Map<String, dynamic> toJsonUpdateValue() {
+    return {
+      'business_value': businessValue,
+    };
+  }
+
+  Map<String, dynamic> toJsonAddBusinessSector() {
+    return {
+      'business_sector': singleSector,
     };
   }
 }

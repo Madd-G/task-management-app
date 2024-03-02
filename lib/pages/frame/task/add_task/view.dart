@@ -36,11 +36,9 @@ class AddTaskPage extends GetView<AddTaskController> {
               task.priority = controller.priority.value;
               debugPrint('product toJson: ${task.toJson()}');
               controller.addTask(task);
-              // product.createdAt = DateTime.now();
-              // product.updatedAt = DateTime.now();
               NotificationEntity notification = NotificationEntity();
               NotificationDetail notificationDetail = NotificationDetail(
-                  title: "TITTTTLLLEEE", body: "BODDDDYYYYY");
+                  title: "owner", body: controller.nameController.text);
               notification = NotificationEntity(
                   notification: notificationDetail, token: '');
               notification.token = controller.fcmToken.value;

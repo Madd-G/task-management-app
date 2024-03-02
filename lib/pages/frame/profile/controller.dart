@@ -14,21 +14,15 @@ class ProfileController extends GetxController {
 
   final ProfileState state = ProfileState();
 
-  late TextEditingController nameController;
+  late TextEditingController sectorController;
 
   File? _photo;
   final ImagePicker _picker = ImagePicker();
 
   @override
   void onInit() {
-    getBusinessProfileData();
-
+    sectorController = TextEditingController();
     super.onInit();
-  }
-
-  getBusinessProfileData() async {
-    state.businessProfile.value = await BusinessProfileAPI.getBusinessProfile();
-    state.isLoading.value = false;
   }
 
   Future imgFromGallery() async {
@@ -68,7 +62,6 @@ class ProfileController extends GetxController {
     }
   }
 
-
   goLogout() async {
     await GoogleSignIn().signOut();
     await UserStore.to.onLogout();
@@ -76,7 +69,7 @@ class ProfileController extends GetxController {
 
   @override
   void onClose() {
-    nameController.dispose();
+    sectorController.dispose();
     super.onClose();
   }
 }

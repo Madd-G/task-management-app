@@ -80,7 +80,7 @@ class FirebaseMessagingHandler {
           image: DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
-                  'https://www.adidas.co.id/media/catalog/product/cache/3bec5fdb79d91223b1a151be2b21ce8d/i/n/in9367_2_hardware_photography_back_center_view_grey.jpg')),
+                  'https://cdn-icons-png.flaticon.com/512/3119/3119338.png')),
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
       ),
@@ -109,7 +109,7 @@ class FirebaseMessagingHandler {
               child: const Icon(
                 Icons.cancel,
                 color: Colors.black,
-                size: 20.0,
+                size: 35.0,
               ),
             ),
           ),

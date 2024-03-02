@@ -44,7 +44,6 @@ class ProfilePage extends GetView<ProfileController> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    // netImageCached(data.businessLogo!, width: 150.0, height: 150.0),
                     Align(
                       alignment: Alignment.topRight,
                       child: IconButton(
@@ -114,7 +113,7 @@ class ProfilePage extends GetView<ProfileController> {
                     const SizedBox(height: 20.0),
                     ProfileBadge(data: data),
                     const SizedBox(height: 10.0),
-                    Text(data.businessValue!, textAlign: TextAlign.justify),
+                    BusinessValue(data: data),
                   ],
                 );
               },
@@ -155,3 +154,4 @@ class ProfilePage extends GetView<ProfileController> {
     );
   }
 }
+
