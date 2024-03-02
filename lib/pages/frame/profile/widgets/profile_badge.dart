@@ -47,7 +47,7 @@ class ProfileBadge extends GetView<ProfileController> {
             },
           ),
         ),
-        if (UserStore.to.profile.role == "owner" ||
+        if (UserStore.to.profile.role == "owner" &&
             data.businessSector!.length < 3)
           GestureDetector(
             onTap: () {
