@@ -42,7 +42,7 @@
 //                 children: <Widget>[
 //                   const Icon(
 //                     Icons.circle,
-//                     color: Colors.red,
+//                     color: AppColor.redColor,
 //                   ),
 //                   const SizedBox(width: 15.0),
 //                   Obx(

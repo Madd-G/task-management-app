@@ -179,6 +179,14 @@ class CustomTextStyle {
 
   /// fontWeight: FontWeight.w600,
   /// fontSize: 28,
+  static const TextStyle text3ExtraLargeRegular = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 28,
+    letterSpacing: -0.04,
+  );
+
+  /// fontWeight: FontWeight.w600,
+  /// fontSize: 28,
   static const TextStyle text3ExtraLargeSemiBold = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 28,

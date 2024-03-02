@@ -16,11 +16,13 @@ class CustomTextField extends StatelessWidget {
     this.hintStyle,
     this.overrideValidator = false,
     this.inputBorder,
+    this.maxLines = 1,
   });
 
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final bool filled;
+  final int? maxLines;
   final Color? fillColour;
   final bool obscureText;
   final bool readOnly;
@@ -46,6 +48,7 @@ class CustomTextField extends StatelessWidget {
       onTapOutside: (_) {
         FocusScope.of(context).unfocus();
       },
+      maxLines: maxLines,
       keyboardType: keyboardType,
       obscureText: obscureText,
       readOnly: readOnly,

@@ -125,9 +125,8 @@ Widget inputEmailEdit({
           color: AppColor.primaryText,
         ),
       ),
-      style: TextStyle(
+      style: const TextStyle(
         color: AppColor.primaryText,
-        fontFamily: "Avenir",
         fontWeight: FontWeight.w400,
         fontSize: 18.0,
       ),

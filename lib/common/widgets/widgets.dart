@@ -8,5 +8,5 @@ export 'dropdown.dart';
 export 'toast.dart';
 export 'app.dart';
 export 'input.dart';
+export 'progress_widget.dart';
 export 'rounded_container.dart';
-export 'task_card.dart';

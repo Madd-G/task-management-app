@@ -1,4 +1,4 @@
-library add_task;
+library detail_task;
 
 export 'binding.dart';
 export 'controller.dart';

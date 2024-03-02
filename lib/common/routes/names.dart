@@ -7,4 +7,5 @@ class AppRoutes {
   static const BOTTOM_NAV_BAR = '/nav_bar';
   static const PROFILE = '/profile';
   static const ADD_TASK = '/add_task';
+  static const DETAIL_TASK = '/detail_task';
 }

@@ -4,10 +4,10 @@ import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/style/style.dart';
 import 'package:konek_mobile/common/utils/utils.dart';
 import 'package:konek_mobile/common/widgets/widgets.dart';
-import 'package:konek_mobile/pages/frame/task/add_task_screen/index.dart';
+import '../index.dart';
 
-class AssigneeDropdown extends GetView<AddTaskController> {
-  const AssigneeDropdown({super.key});
+class AddAssigneeDropdown extends GetView<AddTaskController> {
+  const AddAssigneeDropdown({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +38,19 @@ class AssigneeDropdown extends GetView<AddTaskController> {
                   );
                 }).toList(),
                 hint: Obx(
-                  () => Text(
-                    controller.employeeName.value,
-                    style: CustomTextStyle.textRegular.copyWith(
-                      color: Colors.grey,
-                    ),
+                  () => Row(
+                    children: [
+                      const Icon(
+                        Icons.person,
+                      ),
+                      const SizedBox(width: 15.0),
+                      Text(
+                        controller.employeeName.value,
+                        style: CustomTextStyle.textRegular.copyWith(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 onChanged: (UserEntity? val) {

@@ -3,11 +3,10 @@ import 'package:get/get.dart';
 import 'package:konek_mobile/common/style/style.dart';
 import 'package:konek_mobile/common/utils/utils.dart';
 import 'package:konek_mobile/common/widgets/widgets.dart';
-import 'package:konek_mobile/pages/frame/task/add_task_screen/index.dart';
+import '../index.dart';
 
-class StatusDropdown extends GetView<AddTaskController> {
-
-  const StatusDropdown({super.key});
+class AddCategoryDropdown extends GetView<AddTaskController> {
+  const AddCategoryDropdown({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,37 +29,33 @@ class StatusDropdown extends GetView<AddTaskController> {
                 color: Colors.grey,
                 size: 15.0,
               ),
-              items: controller.state.statusList.map((val) {
+              items: controller.state.categoryList.map((val) {
                 return DropdownMenuItem<String>(
                   value: val['value'],
                   child: Text(val['value']!),
                 );
               }).toList(),
-              hint: Row(
-                children: <Widget>[
-                  Obx(
-                        () => Icon(
-                      Icons.circle,
-                      color: (controller.status.value == "to do")
-                          ? Colors.red
-                          : (controller.status.value == 'in progress')
-                          ? Colors.yellow
-                          : Colors.green,
+              hint: Obx(
+                () => Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.label,
+                      color: (controller.category.value == "quantitative")
+                          ? Colors.indigoAccent
+                          : Colors.blue,
                     ),
-                  ),
-                  const SizedBox(width: 15.0),
-                  Obx(
-                        () => Text(
-                      controller.status.value,
+                    const SizedBox(width: 15.0),
+                    Text(
+                      controller.category.value,
                       style: CustomTextStyle.textRegular.copyWith(
                         color: Colors.grey,
                       ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
               onChanged: (String? val) {
-                controller.status.value = val!;
+                controller.category.value = val!;
               },
             ),
           ),

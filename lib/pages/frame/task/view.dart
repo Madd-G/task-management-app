@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/routes/routes.dart';
 import 'package:konek_mobile/common/style/style.dart';
-import 'package:konek_mobile/common/widgets/widgets.dart';
+import 'package:konek_mobile/pages/frame/task/widgets/widgets.dart';
 import 'index.dart';
 
 class TaskPage extends GetView<TaskController> {
@@ -32,11 +32,14 @@ class TaskPage extends GetView<TaskController> {
             final products = snapshot.data!.docs
                 .map((doc) => Task.fromSnapshot(doc))
                 .toList();
-            return ListView.builder(
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return TaskCard(product: products[index]);
-              },
+            return Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0),
+              child: ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return TaskCard(task: products[index]);
+                },
+              ),
             );
           }
         },

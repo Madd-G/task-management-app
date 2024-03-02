@@ -19,7 +19,7 @@ Widget netImageCached(
         image: DecorationImage(
           image: imageProvider,
           fit: fit,
-          // colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn),
+          // colorFilter: ColorFilter.mode(AppColor.redColor, BlendMode.colorBurn),
         ),
       ),
     ),

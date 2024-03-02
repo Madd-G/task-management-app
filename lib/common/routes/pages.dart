@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:konek_mobile/common/middlewares/middlewares.dart';
 import 'package:konek_mobile/common/widgets/bottom_nav_bar.dart';
 import 'package:konek_mobile/pages/auth/sign_in/index.dart';
-import 'package:konek_mobile/pages/frame/task/add_task_screen/index.dart';
+import 'package:konek_mobile/pages/frame/task/add_task/index.dart';
+import 'package:konek_mobile/pages/frame/task/detail_task/index.dart';
 import 'package:konek_mobile/pages/frame/task/index.dart';
 import 'package:konek_mobile/pages/frame/welcome/index.dart';
 import 'routes.dart';
@@ -42,6 +43,11 @@ class AppPages {
       name: AppRoutes.ADD_TASK,
       page: () => const AddTaskPage(),
       binding: AddTaskBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.DETAIL_TASK,
+      page: () => const DetailTaskPage(),
+      binding: DetailTaskBinding(),
     ),
   ];
 }

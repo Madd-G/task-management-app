@@ -9,8 +9,10 @@ class AddTaskController extends GetxController {
   final AddTaskState state = AddTaskState();
   final nameController = TextEditingController();
   final weightController = TextEditingController();
+  final descriptionController = TextEditingController();
   final addCompanyFormKey = GlobalKey<FormState>();
   RxString status = 'Status'.obs;
+  RxString priority = 'Low'.obs;
   RxString category = 'Category'.obs;
   RxString employeeName = 'Employee'.obs;
   RxString employeeRole = ''.obs;
@@ -32,6 +34,7 @@ class AddTaskController extends GetxController {
   void onClose() {
     nameController.dispose();
     weightController.dispose();
+    descriptionController.dispose();
     super.onClose();
   }
 

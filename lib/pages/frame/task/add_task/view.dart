@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:konek_mobile/pages/frame/task/add_task_screen/widgets/widgets.dart';
+import 'package:konek_mobile/pages/frame/task/detail_task/widgets/widgets.dart';
 import 'package:uuid/uuid.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/widgets/widgets.dart';
@@ -19,18 +19,23 @@ class AddTaskPage extends GetView<AddTaskController> {
         actions: [
           TextButton(
             onPressed: () {
-              Task product = Task();
-              product.id = uuid.v8();
-              product.name = controller.nameController.text;
-              product.category = controller.category.value;
-              product.weight = num.parse(controller.weightController.text);
-              product.status = controller.status.value;
-              product.startDate = controller.startDate?.value;
-              product.endDate = controller.endDate?.value;
-              product.assignee = controller.employeeName.value;
-              product.target = controller.employeeRole.value;
-              debugPrint('product toJson: ${product.toJson()}');
-              controller.addTask(product);
+              Task task = Task();
+              task.id = uuid.v8();
+              task.name = controller.nameController.text;
+              task.category = controller.category.value;
+              task.weight = num.parse(controller.weightController.text);
+              task.status = controller.status.value;
+              task.startDate = controller.startDate?.value;
+              task.endDate = controller.endDate?.value;
+              task.assignee = controller.employeeName.value;
+              task.target = controller.employeeRole.value;
+              task.description = controller.descriptionController.text;
+              task.progress = 0;
+              task.priority = controller.priority.value;
+              // product.createdAt = DateTime.now();
+              // product.updatedAt = DateTime.now();
+              debugPrint('product toJson: ${task.toJson()}');
+              controller.addTask(task);
             },
             child: const Text('SAVE'),
           )
@@ -45,16 +50,23 @@ class AddTaskPage extends GetView<AddTaskController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10.0),
+                CustomTextField(
+                  controller: controller.nameController,
+                  hintText: 'Title',
+                  keyboardType: TextInputType.name,
+                ),
+                const SizedBox(height: 15.0),
+                const AddCategoryDropdown(),
+                const SizedBox(height: 15.0),
                 SizedBox(
                   width: 700,
                   child: CustomTextField(
-                    controller: controller.nameController,
-                    hintText: 'Username',
-                    keyboardType: TextInputType.name,
+                    controller: controller.descriptionController,
+                    hintText: 'Description',
+                    keyboardType: TextInputType.text,
+                    maxLines: 10,
                   ),
                 ),
-                const SizedBox(height: 15.0),
-                const CategoryDropdown(),
                 const SizedBox(height: 15.0),
                 SizedBox(
                   width: 700,
@@ -65,9 +77,11 @@ class AddTaskPage extends GetView<AddTaskController> {
                   ),
                 ),
                 const SizedBox(height: 15.0),
-                const StatusDropdown(),
+                const AddStatusDropdown(),
                 const SizedBox(height: 15.0),
-                const AssigneeDropdown(),
+                const AddPriorityDropdown(),
+                const SizedBox(height: 15.0),
+                const AddAssigneeDropdown(),
                 const SizedBox(height: 15.0),
                 DateTimeRow(
                   title: 'Start Date',

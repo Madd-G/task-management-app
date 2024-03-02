@@ -11,12 +11,12 @@ class BottomNavBar extends GetView<BottomNavBarController> {
   const BottomNavBar({super.key});
 
   static const List<String> _activeIcons = [
-    MediaRes.homeFilled,
+    MediaRes.documentFilled,
     MediaRes.userFilled,
   ];
 
   static const List<String> _inActiveIcons = [
-    MediaRes.home,
+    MediaRes.document,
     MediaRes.user,
   ];
 

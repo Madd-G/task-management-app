@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:konek_mobile/common/entities/entities.dart';
 
 class AddTaskState {
   AddTaskState();
@@ -16,6 +15,19 @@ class AddTaskState {
     {
       "label": "Done",
       "value": "done",
+    },
+  ];  final List<Map<String, String>> priorityList = [
+    {
+      "label": "Low",
+      "value": "Low",
+    },
+    {
+      "label": "Medium",
+      "value": "Medium",
+    },
+    {
+      "label": "High",
+      "value": "High",
     },
   ];
 
