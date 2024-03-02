@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'index.dart';
 
@@ -10,6 +11,13 @@ class DetailTaskController extends GetxController {
   Rx<DateTime?>? lastUpdate;
 
   DetailTaskController();
+
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  //
+  // void getToken() async {
+  //   String? token = await _firebaseMessaging.getToken();
+  // }
+
   @override
   void onInit() {
     print('onInit');
@@ -19,6 +27,7 @@ class DetailTaskController extends GetxController {
     priority = state.task.priority.obs;
     lastUpdate = state.task.updatedAt.obs;
     print('task: ${state.task}');
+    // getToken();
     super.onInit();
   }
 }

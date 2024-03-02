@@ -6,6 +6,7 @@ class UserEntity {
   DateTime? createdAt;
   DateTime? updatedAt;
   String? password;
+  String? token;
 
   UserEntity({
     this.id,
@@ -15,6 +16,7 @@ class UserEntity {
     this.createdAt,
     this.updatedAt,
     this.password,
+    this.token,
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class UserEntity {
       role: json["role"],
       createdAt: _parseDateTime(json['createdAt']),
       updatedAt: _parseDateTime(json['updatedAt']),
+      token: json["token"],
     );
   }
 
@@ -51,7 +54,7 @@ class UserEntity {
       "role": role,
       "createdAt": _formatDateTime(createdAt),
       "updatedAt": _formatDateTime(updatedAt),
-      // "token": accessToken,
+      "token": token,
     };
   }
 

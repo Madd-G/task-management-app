@@ -1,4 +1,5 @@
 import 'package:konek_mobile/common/entities/entities.dart';
+import 'package:konek_mobile/common/entities/notification.dart';
 import 'package:konek_mobile/common/utils/utils.dart';
 
 class TaskAPI {
@@ -44,6 +45,13 @@ class TaskAPI {
   }) async {
     await HttpUtil().delete(
       'deleteTask/$docId',
+    );
+  }
+
+  static void sendNotification({NotificationEntity? notification}) async {
+    await HttpUtil().post(
+      'sendNotification',
+      data: notification?.toJson(),
     );
   }
 }

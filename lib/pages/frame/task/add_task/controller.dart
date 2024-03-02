@@ -15,6 +15,7 @@ class AddTaskController extends GetxController {
   RxString priority = 'Low'.obs;
   RxString category = 'Category'.obs;
   RxString employeeName = 'Employee'.obs;
+  RxString fcmToken = ''.obs;
   RxString employeeRole = ''.obs;
   Rx<DateTime>? startDate = DateTime.now().obs;
   Rx<DateTime>? endDate = DateTime.now().obs;

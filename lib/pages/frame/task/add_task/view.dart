@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:konek_mobile/common/apis/apis.dart';
+import 'package:konek_mobile/common/entities/notification.dart';
 import 'package:konek_mobile/pages/frame/task/detail_task/widgets/widgets.dart';
 import 'package:uuid/uuid.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
@@ -32,10 +34,18 @@ class AddTaskPage extends GetView<AddTaskController> {
               task.description = controller.descriptionController.text;
               task.progress = 0;
               task.priority = controller.priority.value;
-              // product.createdAt = DateTime.now();
-              // product.updatedAt = DateTime.now();
               debugPrint('product toJson: ${task.toJson()}');
               controller.addTask(task);
+              // product.createdAt = DateTime.now();
+              // product.updatedAt = DateTime.now();
+              NotificationEntity notification = NotificationEntity();
+              NotificationDetail notificationDetail = NotificationDetail(
+                  title: "TITTTTLLLEEE", body: "BODDDDYYYYY");
+              notification = NotificationEntity(
+                  notification: notificationDetail, token: '');
+              notification.token = controller.fcmToken.value;
+              print('notification.toJson(): ${notification.toJson()}');
+              TaskAPI.sendNotification(notification: notification);
             },
             child: const Text('SAVE'),
           )
