@@ -29,21 +29,17 @@ class TaskCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  RoundedContainer(
-                    radius: 12.0,
-                    containerColor: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 6.0, horizontal: 8.0),
-                      child: Text(
-                        task.target!,
-                        style: CustomTextStyle.textRegularSemiBold,
-                      ),
+                  Expanded(
+                    child: Text(
+                      task.name!,
+                      style: CustomTextStyle.textExtraLargeSemiBold,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  const SizedBox(width: 15.0),
                   RoundedContainer(
                     radius: 12.0,
                     containerColor: (task.priority! == "Low")
@@ -53,7 +49,7 @@ class TaskCard extends StatelessWidget {
                             : AppColor.redColor,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 2.0, horizontal: 8.0),
+                          vertical: 4.0, horizontal: 8.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -70,28 +66,57 @@ class TaskCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               const SizedBox(height: 10.0),
-              Text(
-                task.name!,
-                style: CustomTextStyle.textExtraLargeSemiBold,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              if (UserStore.to.profile.role == 'owner')
-                Row(
-                  children: [
-                    const Icon(Icons.person_2_outlined, size: 20.0),
-                    const SizedBox(width: 5.0),
-                    Text(
-                      task.assignee!,
-                      style: const TextStyle(fontSize: 16),
+              Row(
+                children: [
+                  if (UserStore.to.profile.role == 'owner')
+                    Row(
+                      children: [
+                        const Icon(Icons.person_2_outlined, size: 20.0),
+                        const SizedBox(width: 5.0),
+                        Text(
+                          task.assignee!,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(width: 10.0),
+                      ],
                     ),
-                  ],
-                ),
+                  Row(
+                    children: [
+                      RoundedContainer(
+                        radius: 5.0,
+                        containerColor: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6.0, horizontal: 8.0),
+                          child: Text(
+                            task.target!,
+                            style: CustomTextStyle.textRegularSemiBold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                      RoundedContainer(
+                        radius: 5.0,
+                        containerColor: Colors.black,
+                        borderColor: Colors.black,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 4.0, horizontal: 12.0),
+                          child: Text(
+                            task.status!,
+                            style: CustomTextStyle.textSmallSemiBold
+                                .copyWith(color: Colors.white),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
               const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/extensions/extensions.dart';
+import 'package:konek_mobile/common/store/store.dart';
 import 'package:konek_mobile/common/utils/utils.dart';
 import 'package:konek_mobile/pages/frame/task/detail_task/widgets/widgets.dart';
 
@@ -45,12 +46,13 @@ class DetailBody extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10.0),
-              const Row(
-                children: [
-                  Text('priority     : '),
-                  DetailPriorityDropdown(),
-                ],
-              ),
+              if (UserStore.to.profile.role == "owner")
+                const Row(
+                  children: [
+                    Text('priority     : '),
+                    DetailPriorityDropdown(),
+                  ],
+                ),
             ],
           ),
           Column(

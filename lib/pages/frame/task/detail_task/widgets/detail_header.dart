@@ -12,6 +12,7 @@ class DetailHeader extends StatelessWidget {
   const DetailHeader({super.key, required this.data});
 
   final Task data;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -131,8 +132,9 @@ class DetailHeader extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text("Assignee: ${data.assignee!}",
-                        style: CustomTextStyle.textRegular),
+                    if (UserStore.to.profile.role == "owner")
+                      Text("Assignee: ${data.assignee!}",
+                          style: CustomTextStyle.textRegular),
                   ],
                 ),
               ],
