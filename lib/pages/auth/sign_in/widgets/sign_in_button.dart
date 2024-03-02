@@ -41,6 +41,7 @@ class SignInButton extends GetView<SignInController> {
           ),
         ),
         onTap: () {
+          controller.updateDeviceToken();
           controller.login();
         });
   }

@@ -20,6 +20,15 @@ class UserAPI {
     }
   }
 
+  static Future<void> updateDeviceToken({
+    UserEntity? params,
+  }) async {
+    await HttpUtil().post(
+      'updateDeviceToken',
+      data: params?.toJsonUpdateDeviceToken(),
+    );
+  }
+
   static Future<List<UserEntity>> getEmployees() async {
     try {
       var response = await HttpUtil().get('getEmployeeNameRole');

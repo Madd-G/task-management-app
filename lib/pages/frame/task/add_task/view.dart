@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:konek_mobile/common/apis/apis.dart';
 import 'package:konek_mobile/common/entities/notification.dart';
-import 'package:konek_mobile/pages/frame/task/detail_task/widgets/widgets.dart';
 import 'package:uuid/uuid.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/widgets/widgets.dart';

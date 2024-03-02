@@ -45,6 +45,11 @@ class UserEntity {
         "password": password,
       };
 
+  Map<String, dynamic> toJsonUpdateDeviceToken() => {
+        "id": id,
+        "token": token,
+      };
+
   Map<String, dynamic> toJson() {
     return {
       "id": id,
