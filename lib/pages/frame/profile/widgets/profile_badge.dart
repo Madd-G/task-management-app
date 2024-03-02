@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:konek_mobile/common/apis/apis.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/store/store.dart';
-import 'package:konek_mobile/common/style/style.dart';
 import 'package:konek_mobile/common/widgets/rounded_container.dart';
 import 'package:konek_mobile/pages/frame/profile/index.dart';
 

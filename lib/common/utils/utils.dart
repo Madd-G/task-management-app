@@ -5,3 +5,4 @@ export 'format_date_time.dart';
 export 'http.dart';
 export 'loading.dart';
 export 'validator.dart';
+export 'firebase_messaging_handler.dart';

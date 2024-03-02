@@ -17,7 +17,6 @@ class BusinessProfileAPI {
   }
 
   static Future<BusinessProfile> updateValue(BusinessProfile name) async {
-    print('name.toJsonUpdateValue(): ${name.toJsonUpdateValue()}');
     var response = await HttpUtil()
         .post('updateBusinessValue', data: name.toJsonUpdateValue());
     return BusinessProfile.fromJson(response);
@@ -40,7 +39,6 @@ class BusinessProfileAPI {
   }
 
   static Future<void> addBusinessSector(BusinessProfile name) async {
-    print('name ya: ${name.toJsonAddBusinessSector()}');
     await HttpUtil().post('addBusinessSector', data: name.toJsonAddBusinessSector());
   }
 

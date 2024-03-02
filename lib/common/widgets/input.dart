@@ -11,7 +11,7 @@ Widget inputTextEdit({
   double marginTop = 15,
   double height = 44,
   bool autofocus = false,
-  Widget? ClearWidget,
+  Widget? clearWidget,
   VoidCallback? onPressed,
   ValueChanged<String>? onchanged,
 }) {
@@ -29,7 +29,7 @@ Widget inputTextEdit({
       keyboardType: keyboardType,
       decoration: InputDecoration(
         hintText: hintText,
-        suffixIcon: ClearWidget,
+        suffixIcon: clearWidget,
         hintStyle: const TextStyle(color: AppColor.secondaryText),
         contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
         isDense: true,

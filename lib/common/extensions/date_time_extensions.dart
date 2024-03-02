@@ -1,4 +1,6 @@
 extension DateExtension on DateTime {
+
+  /// 12 May 2000
   String toDate() {
     String day = this.day.toString().padLeft(2, '0');
     List<String> months = [
@@ -20,12 +22,15 @@ extension DateExtension on DateTime {
     return '$day $month $year';
   }
 
+  /// 12:00
   String toTime() {
     String hour = this.hour.toString().padLeft(2, '0');
     String minute = this.minute.toString().padLeft(2, '0');
     return '$hour:$minute';
   }
 
+  /// 12d 5h
+  /// 2h 3m
   String differenceDate(DateTime other) {
     Duration diff = difference(other).abs();
     int days = diff.inDays;

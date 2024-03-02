@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -31,8 +30,8 @@ class SignInController extends GetxController {
       await UserStore.to.saveProfile(result);
       Get.offAllNamed(AppRoutes.BOTTOM_NAV_BAR);
       EasyLoading.dismiss();
+    // ignore: empty_catches
     } catch (error) {
-      print('Error ya : $error');
     }
   }
 
@@ -43,8 +42,6 @@ class SignInController extends GetxController {
     UserEntity user = UserEntity();
     user.id = id;
     user.token = token;
-    print('user token: ${user.token}');
-    print('user toJson: ${user.token}');
     UserAPI.updateDeviceToken(params: user);
   }
 }

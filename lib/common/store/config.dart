@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_overrides
+
 import 'package:get/get.dart';
 import 'package:konek_mobile/common/constants/storage.dart';
 import 'package:konek_mobile/common/services/services.dart';

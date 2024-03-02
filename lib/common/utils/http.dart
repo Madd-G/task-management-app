@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_conditional_assignment, prefer_collection_literals, deprecated_member_use
+
 import 'dart:async';
 import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
@@ -94,15 +96,11 @@ class HttpUtil {
         return ErrorEntity(code: -1, message: "Request timed out");
       case DioExceptionType.receiveTimeout:
         return ErrorEntity(code: -1, message: "response timeout");
-      case DioExceptionType.cancel:
-        return ErrorEntity(code: -1, message: "request to cancel");
       case DioExceptionType.badResponse:
         {
           try {
             int errCode =
                 error.response != null ? error.response!.statusCode! : -1;
-            // String errMsg = error.response.statusMessage;
-            // return ErrorEntity(code: errCode, message: errMsg);
             switch (errCode) {
               case 400:
                 return ErrorEntity(
@@ -166,23 +164,23 @@ class HttpUtil {
     String path, {
     Map<String, dynamic>? queryParameters,
     Options? options,
-    // bool refresh = true,
-    // bool noCache = !CACHE_ENABLE,
-    // bool list = false,
-    // String cacheKey = '',
-    // bool cacheDisk = false,
+    bool refresh = true,
+    bool noCache = !CACHE_ENABLE,
+    bool list = false,
+    String cacheKey = '',
+    bool cacheDisk = false,
   }) async {
     Options requestOptions = options ?? Options();
     if (requestOptions.extra == null) {
       requestOptions.extra = Map();
     }
-    // requestOptions.extra!.addAll({
-    //   "refresh": refresh,
-    //   // "noCache": noCache,
-    //   "list": list,
-    //   "cacheKey": cacheKey,
-    //   "cacheDisk": cacheDisk,
-    // });
+    requestOptions.extra!.addAll({
+      "refresh": refresh,
+      // "noCache": noCache,
+      "list": list,
+      "cacheKey": cacheKey,
+      "cacheDisk": cacheDisk,
+    });
     requestOptions.headers = requestOptions.headers ?? {};
     Map<String, dynamic>? authorization = getAuthorizationHeader();
     if (authorization != null) {

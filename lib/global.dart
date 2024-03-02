@@ -9,8 +9,6 @@ import 'package:konek_mobile/common/store/store.dart';
 import 'package:konek_mobile/common/utils/utils.dart';
 import 'package:konek_mobile/firebase_options.dart';
 
-import 'common/utils/FirebaseMessagingHandler.dart';
-
 class Global {
   static Future init() async {
     WidgetsFlutterBinding.ensureInitialized();

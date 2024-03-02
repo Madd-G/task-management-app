@@ -41,7 +41,6 @@ class AddTaskPage extends GetView<AddTaskController> {
               notification = NotificationEntity(
                   notification: notificationDetail, token: '');
               notification.token = controller.fcmToken.value;
-              print('notification.toJson(): ${notification.toJson()}');
               TaskAPI.sendNotification(notification: notification);
             },
             child: const Text('SAVE'),

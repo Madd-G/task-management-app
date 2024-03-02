@@ -6,7 +6,6 @@ class TaskAPI {
   static void addTask({
     Task? params,
   }) async {
-    print('params?.toJson(): ${params?.toJson()}');
     await HttpUtil().post(
       'addTask',
       data: params?.toJson(),

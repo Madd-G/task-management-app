@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:konek_mobile/common/apis/apis.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/store/store.dart';
-import 'package:konek_mobile/common/utils/utils.dart';
 import 'package:konek_mobile/pages/frame/profile/index.dart';
 
 class BusinessValue extends StatefulWidget {
@@ -67,7 +66,6 @@ class _BusinessValueState extends State<BusinessValue> {
                 onPressed: () async {
                   BusinessProfile profile = BusinessProfile();
                   profile.businessValue = valueController.text;
-                  print('profile.businessValue: ${profile.businessValue}');
                   BusinessProfileAPI.updateValue(profile);
                   Get.back();
                 },

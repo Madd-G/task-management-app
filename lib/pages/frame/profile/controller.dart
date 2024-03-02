@@ -48,13 +48,9 @@ class ProfileController extends GetxController {
   }
 
   Future uploadFile() async {
-    // if (_photo == null) return;
-    // debugPrint(_photo);
     var result = await BusinessProfileAPI.uploadImage(file: _photo);
     debugPrint(result.data);
     if (result.code == 0) {
-      // state.profileDetail.value.avatar = result.data;
-      // state.profileDetail.refresh();
       state.businessProfile.value.businessLogo = result.data;
       state.businessProfile.refresh();
     } else {

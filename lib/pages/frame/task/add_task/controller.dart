@@ -28,7 +28,6 @@ class AddTaskController extends GetxController {
 
   Future<void> getEmployee() async {
     state.employeeList.value =  await UserAPI.getEmployees();
-    print('state.employeeList.value: ${state.employeeList}');
   }
 
   @override
@@ -55,10 +54,8 @@ class AddTaskController extends GetxController {
       onConfirm: (dateTime, List<int> index) {
         if (date == "start date") {
           startDate?.value = dateTime;
-          print('startDate?.value: ${startDate?.value}');
         } else if (date == "end date") {
           endDate?.value = dateTime;
-          print('endDate?.value: ${endDate?.value}');
         }
         update();
       },

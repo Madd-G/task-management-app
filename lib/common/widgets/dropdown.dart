@@ -10,7 +10,7 @@ class Dropdown extends StatefulWidget {
   final Function(dynamic value, String? label) onChanged;
 
   const Dropdown({
-    Key? key,
+    super.key,
     required this.label,
     required this.items,
     required this.onChanged,
@@ -18,7 +18,7 @@ class Dropdown extends StatefulWidget {
     this.validator,
     this.emptyMode = true,
     this.hint,
-  }) : super(key: key);
+  });
 
   @override
   State<Dropdown> createState() => _DropdownState();

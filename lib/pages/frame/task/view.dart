@@ -5,6 +5,7 @@ import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/routes/routes.dart';
 import 'package:konek_mobile/common/store/store.dart';
 import 'package:konek_mobile/common/style/style.dart';
+import 'package:konek_mobile/common/widgets/widgets.dart';
 import 'package:konek_mobile/pages/frame/task/widgets/widgets.dart';
 import 'index.dart';
 
@@ -16,7 +17,50 @@ class TaskPage extends GetView<TaskController> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('KONEK MOBILE'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              onTap: () {
+                final RenderBox overlay =
+                    Overlay.of(context).context.findRenderObject() as RenderBox;
+                final RenderBox button =
+                    context.findRenderObject() as RenderBox;
+                final Offset position = button
+                    .localToGlobal(const Offset(-50, 50), ancestor: overlay);
+                final RelativeRect positionPopup = RelativeRect.fromRect(
+                  Rect.fromPoints(
+                    position,
+                    position.translate(button.size.width, button.size.height),
+                  ),
+                  Offset.zero & overlay.size,
+                );
+
+                showMenu(
+                  // constraints: const BoxConstraints(minWidth: 200.0, minHeight: 100.0, maxWidth: 200.0, maxHeight: 100.0),
+                  context: context,
+                  position: positionPopup,
+                  items: [
+                    PopupMenuItem(
+                      value: UserStore.to.profile.username!,
+                      child: Text('user: ${UserStore.to.profile.username!}'),
+                    ),
+                    PopupMenuItem(
+                      value: UserStore.to.profile.role!,
+                      child: Text("role: ${UserStore.to.profile.role!}"),
+                    ),
+                  ],
+                );
+              },
+              child: netImageCached(
+                  'https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png',
+                  width: 35.0,
+                  height: 35.0),
+            ),
+            const Text('KONEK MOBILE'),
+            const SizedBox(height: 35.0, width: 35.0)
+          ],
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
