@@ -50,6 +50,10 @@ class UserEntity {
         "token": token,
       };
 
+  Map<String, dynamic> toJsonDeleteDeviceToken() => {
+        "id": id,
+      };
+
   Map<String, dynamic> toJson() {
     return {
       "id": id,

@@ -43,6 +43,12 @@ class BusinessProfile {
     };
   }
 
+  Map<String, dynamic> toJsonUpdateLogo() {
+    return {
+      'business_logo': businessLogo,
+    };
+  }
+
   Map<String, dynamic> toJsonAddBusinessSector() {
     return {
       'business_sector': singleSector,

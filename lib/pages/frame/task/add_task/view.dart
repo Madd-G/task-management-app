@@ -33,15 +33,16 @@ class AddTaskPage extends GetView<AddTaskController> {
               task.description = controller.descriptionController.text;
               task.progress = 0;
               task.priority = controller.priority.value;
-              debugPrint('product toJson: ${task.toJson()}');
               controller.addTask(task);
-              NotificationEntity notification = NotificationEntity();
-              NotificationDetail notificationDetail = NotificationDetail(
-                  title: "owner", body: controller.nameController.text);
-              notification = NotificationEntity(
-                  notification: notificationDetail, token: '');
-              notification.token = controller.fcmToken.value;
-              TaskAPI.sendNotification(notification: notification);
+             if (controller.fcmToken?.value != '') {
+               NotificationEntity notification = NotificationEntity();
+               NotificationDetail notificationDetail = NotificationDetail(
+                   title: "owner", body: controller.nameController.text);
+               notification = NotificationEntity(
+                   notification: notificationDetail, token: '');
+               notification.token = controller.fcmToken?.value;
+               TaskAPI.sendNotification(notification: notification);
+             }
             },
             child: const Text('SAVE'),
           )

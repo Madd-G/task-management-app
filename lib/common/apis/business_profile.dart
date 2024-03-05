@@ -22,6 +22,12 @@ class BusinessProfileAPI {
     return BusinessProfile.fromJson(response);
   }
 
+  static Future<BusinessProfile> updateLogo(BusinessProfile name) async {
+    var response = await HttpUtil()
+        .post('updateBusinessLogo', data: name.toJsonUpdateLogo());
+    return BusinessProfile.fromJson(response);
+  }
+
   static Future<BaseResponseEntity> uploadImage({File? file}) async {
     String fileName = file!.path.split('/').last;
 
@@ -39,7 +45,8 @@ class BusinessProfileAPI {
   }
 
   static Future<void> addBusinessSector(BusinessProfile name) async {
-    await HttpUtil().post('addBusinessSector', data: name.toJsonAddBusinessSector());
+    await HttpUtil()
+        .post('addBusinessSector', data: name.toJsonAddBusinessSector());
   }
 
   static void deleteBusinessSector({

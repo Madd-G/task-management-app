@@ -15,7 +15,7 @@ Widget netImageCached(
       width: width,
       margin: margin,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(54)),
+        borderRadius: const BorderRadius.all(Radius.circular(100)),
         image: DecorationImage(
           image: imageProvider,
           fit: fit,
@@ -23,8 +23,12 @@ Widget netImageCached(
         ),
       ),
     ),
-    errorWidget: (context, url, error) => const Image(
-      image: AssetImage('assets/images/feature-1.png'),
+    errorWidget: (context, url, error) => const ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(100.0)),
+      child: Image(
+        image: NetworkImage(
+            'https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg'),
+      ),
     ),
   );
 }

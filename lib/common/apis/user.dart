@@ -29,6 +29,15 @@ class UserAPI {
     );
   }
 
+  static Future<void> deleteDeviceToken({
+    UserEntity? params,
+  }) async {
+    await HttpUtil().post(
+      'deleteDeviceToken',
+      data: params?.toJsonDeleteDeviceToken(),
+    );
+  }
+
   static Future<List<UserEntity>> getEmployees() async {
     try {
       var response = await HttpUtil().get('getEmployeeNameRole');

@@ -6,5 +6,6 @@ class ProfileState {
 
   RxBool isEdit = false.obs;
   RxBool isLoading = true.obs;
+
   Rx<BusinessProfile> businessProfile = BusinessProfile().obs;
 }
