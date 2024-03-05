@@ -104,9 +104,9 @@ class Task {
   static Map<String, dynamic> _formatDateTime(DateTime? dateTime) =>
       dateTime != null
           ? {
-        "_seconds": dateTime.millisecondsSinceEpoch ~/ 1000,
-        "_nanoseconds":
-        (dateTime.microsecondsSinceEpoch % 1000000) * 1000,
-      }
+              "_seconds": dateTime.millisecondsSinceEpoch ~/ 1000,
+              "_nanoseconds":
+                  (dateTime.microsecondsSinceEpoch % 1000000) * 1000,
+            }
           : {};
 }

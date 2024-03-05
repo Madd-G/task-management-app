@@ -11,10 +11,10 @@ class AddTaskController extends GetxController {
   final weightController = TextEditingController();
   final descriptionController = TextEditingController();
   final addCompanyFormKey = GlobalKey<FormState>();
-  RxString status = 'Status'.obs;
+  RxString status = 'To Do'.obs;
   RxString priority = 'Low'.obs;
   RxString category = 'Category'.obs;
-  RxString employeeName = 'Employee'.obs;
+  RxString employeeName = ''.obs;
   RxString? fcmToken = ''.obs;
   RxString employeeRole = ''.obs;
   Rx<DateTime>? startDate = DateTime.now().obs;

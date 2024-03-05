@@ -40,7 +40,7 @@ class CustomTextField extends StatelessWidget {
       validator: overrideValidator
           ? validator
           : (value) {
-              if (value == null || value.isEmpty) {
+              if (value == null || value.isEmpty || value == '') {
                 return 'This field is required';
               }
               return validator?.call(value);

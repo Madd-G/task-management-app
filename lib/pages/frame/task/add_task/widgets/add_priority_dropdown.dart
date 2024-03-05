@@ -36,20 +36,27 @@ class AddPriorityDropdown extends GetView<AddTaskController> {
                 );
               }).toList(),
               hint: Obx(
-                () => Row(
-                  children: [
-                    const Icon(
-                      Icons.person,
-                    ),
-                    const SizedBox(width: 15.0),
-                    Text(
-                      controller.priority.value,
-                      style: CustomTextStyle.textRegular.copyWith(
-                        color: Colors.grey,
+                () {
+                  return Row(
+                    children: [
+                      Icon(
+                        Icons.free_cancellation_rounded,
+                        color: (controller.priority.value == "High")
+                            ? Colors.red
+                            : (controller.priority.value == 'Medium')
+                                ? Colors.yellow
+                                : Colors.green,
                       ),
-                    ),
-                  ],
-                ),
+                      const SizedBox(width: 15.0),
+                      Text(
+                        controller.priority.value,
+                        style: CustomTextStyle.textRegular.copyWith(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               onChanged: (String? val) {
                 controller.priority.value = val!;

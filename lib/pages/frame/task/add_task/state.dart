@@ -6,17 +6,18 @@ class AddTaskState {
   final List<Map<String, String>> statusList = [
     {
       "label": "To Do",
-      "value": "to do",
+      "value": "To Do",
     },
     {
       "label": "In Progress",
-      "value": "in progress",
+      "value": "In Progress",
     },
     {
       "label": "Done",
-      "value": "done",
+      "value": "Done",
     },
-  ];  final List<Map<String, String>> priorityList = [
+  ];
+  final List<Map<String, String>> priorityList = [
     {
       "label": "Low",
       "value": "Low",
@@ -34,27 +35,13 @@ class AddTaskState {
   final List<Map<String, String>> categoryList = [
     {
       "label": "Quantitative",
-      "value": "quantitative",
+      "value": "Quantitative",
     },
     {
       "label": "Qualitative",
-      "value": "qualitative",
+      "value": "Qualitative",
     },
   ];
 
   RxList employeeList = [].obs;
-
-// final List<Map<String, String>> employeeList = [
-//   {
-//     "label": "Lina",
-//     "value": "Lina",
-//   },
-//   {
-//     "label": "Lionel",
-//     "value": "Lionel",
-//   }, {
-//     "label": "Rachel",
-//     "value": "Rachel",
-//   },
-// ];
 }

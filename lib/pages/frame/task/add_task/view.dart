@@ -20,32 +20,30 @@ class AddTaskPage extends GetView<AddTaskController> {
         actions: [
           TextButton(
             onPressed: () {
-              Task task = Task();
-              task.id = uuid.v8();
-              task.name = controller.nameController.text;
-              task.category = controller.category.value;
-              task.weight = num.parse(controller.weightController.text);
-              task.status = controller.status.value;
-              task.startDate = controller.startDate?.value;
-              task.endDate = controller.endDate?.value;
-              task.assignee = controller.employeeName.value;
-              task.target = controller.employeeRole.value;
-              task.description = controller.descriptionController.text;
-              task.progress = 0;
-              task.priority = controller.priority.value;
-              controller.addTask(task);
-              print(
-                  'controller.fcmToken?.value: ${controller.fcmToken?.value}');
-              print(
-                  'controller.fcmToken?.value type; ${controller.fcmToken?.value.runtimeType}');
-              if (controller.fcmToken?.value != '') {
-                NotificationEntity notification = NotificationEntity();
-                NotificationDetail notificationDetail = NotificationDetail(
-                    title: "owner", body: controller.nameController.text);
-                notification = NotificationEntity(
-                    notification: notificationDetail, token: '');
-                notification.token = controller.fcmToken?.value;
-                TaskAPI.sendNotification(notification: notification);
+              if (controller.addCompanyFormKey.currentState!.validate()) {
+                Task task = Task();
+                task.id = uuid.v8();
+                task.name = controller.nameController.text;
+                task.category = controller.category.value;
+                task.weight = num.parse(controller.weightController.text);
+                task.status = controller.status.value;
+                task.startDate = controller.startDate?.value;
+                task.endDate = controller.endDate?.value;
+                task.assignee = controller.employeeName.value;
+                task.target = controller.employeeRole.value;
+                task.description = controller.descriptionController.text;
+                task.progress = 0;
+                task.priority = controller.priority.value;
+                controller.addTask(task);
+                if (controller.fcmToken?.value != '') {
+                  NotificationEntity notification = NotificationEntity();
+                  NotificationDetail notificationDetail = NotificationDetail(
+                      title: "owner", body: controller.nameController.text);
+                  notification = NotificationEntity(
+                      notification: notificationDetail, token: '');
+                  notification.token = controller.fcmToken?.value;
+                  TaskAPI.sendNotification(notification: notification);
+                }
               }
             },
             child: const Text('SAVE'),
@@ -65,27 +63,22 @@ class AddTaskPage extends GetView<AddTaskController> {
                   controller: controller.nameController,
                   hintText: 'Title',
                   keyboardType: TextInputType.name,
+                  overrideValidator: false,
                 ),
                 const SizedBox(height: 15.0),
                 const AddCategoryDropdown(),
                 const SizedBox(height: 15.0),
-                SizedBox(
-                  width: 700,
-                  child: CustomTextField(
-                    controller: controller.descriptionController,
-                    hintText: 'Description',
-                    keyboardType: TextInputType.text,
-                    maxLines: 10,
-                  ),
+                CustomTextField(
+                  controller: controller.descriptionController,
+                  hintText: 'Description',
+                  keyboardType: TextInputType.text,
+                  maxLines: 10,
                 ),
                 const SizedBox(height: 15.0),
-                SizedBox(
-                  width: 700,
-                  child: CustomTextField(
-                    controller: controller.weightController,
-                    hintText: 'Weight',
-                    keyboardType: TextInputType.number,
-                  ),
+                CustomTextField(
+                  controller: controller.weightController,
+                  hintText: 'Weight',
+                  keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 15.0),
                 const AddStatusDropdown(),
