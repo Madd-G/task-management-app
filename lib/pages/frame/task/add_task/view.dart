@@ -16,7 +16,7 @@ class AddTaskPage extends GetView<AddTaskController> {
     const Uuid uuid = Uuid();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Product Task'),
+        title: const Text('Add Task'),
         actions: [
           TextButton(
             onPressed: () {

@@ -39,6 +39,16 @@ class TaskAPI {
     );
   }
 
+  static void updateTaskIsRead({
+    Task? params,
+  }) async {
+    print('params?.toJsonIsRead(): ${params?.toJsonIsRead()}');
+    await HttpUtil().post(
+      'updateTaskIsRead',
+      data: params?.toJsonIsRead(),
+    );
+  }
+
   static void deleteTask({
     required String docId,
   }) async {

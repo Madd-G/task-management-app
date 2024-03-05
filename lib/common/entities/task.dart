@@ -15,6 +15,8 @@ class Task {
   String? priority;
   DateTime? createdAt;
   DateTime? updatedAt;
+  bool? isRead;
+  String? updater;
 
   Task({
     this.id,
@@ -31,6 +33,8 @@ class Task {
     this.priority,
     this.createdAt,
     this.updatedAt,
+    this.isRead,
+    this.updater,
   });
 
   Map<String, dynamic> toJson() {
@@ -49,6 +53,8 @@ class Task {
       'priority': priority,
       'created_at': _formatDateTime(createdAt),
       'updated_at': _formatDateTime(updatedAt),
+      'is_read': isRead,
+      'updater': updater,
     };
   }
 
@@ -56,6 +62,7 @@ class Task {
     return {
       'id': id,
       'progress': progress,
+      'updater': updater,
     };
   }
 
@@ -63,6 +70,7 @@ class Task {
     return {
       'id': id,
       'status': status,
+      'updater': updater,
     };
   }
 
@@ -70,6 +78,14 @@ class Task {
     return {
       'id': id,
       'priority': priority,
+      'updater': updater,
+    };
+  }
+
+  Map<String, dynamic> toJsonIsRead() {
+    return {
+      'id': id,
+      'is_read': isRead,
     };
   }
 
@@ -90,6 +106,8 @@ class Task {
       priority: data['priority'] ?? '',
       createdAt: (data['created_at'] as Timestamp).toDate(),
       updatedAt: (data['updated_at'] as Timestamp).toDate(),
+      isRead: data['is_read'],
+      updater: data['updater'],
     );
   }
 
@@ -98,7 +116,7 @@ class Task {
     return 'Task(id: $id, name: $name, category: $category, weight: $weight, '
         'description: $description, startDate: $startDate, endDate: $endDate, '
         'status: $status, assignee: $assignee, target: $target, progress: $progress, '
-        'priority: $priority, createdAt: $createdAt, updatedAt: $updatedAt)';
+        'priority: $priority, createdAt: $createdAt, updatedAt: $updatedAt, isRead: $isRead, updater: $updater)';
   }
 
   static Map<String, dynamic> _formatDateTime(DateTime? dateTime) =>

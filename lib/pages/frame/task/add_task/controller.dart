@@ -14,7 +14,7 @@ class AddTaskController extends GetxController {
   RxString status = 'To Do'.obs;
   RxString priority = 'Low'.obs;
   RxString category = 'Category'.obs;
-  RxString employeeName = ''.obs;
+  RxString employeeName = 'Assignee'.obs;
   RxString? fcmToken = ''.obs;
   RxString employeeRole = ''.obs;
   Rx<DateTime>? startDate = DateTime.now().obs;
@@ -27,7 +27,7 @@ class AddTaskController extends GetxController {
   }
 
   Future<void> getEmployee() async {
-    state.employeeList.value =  await UserAPI.getEmployees();
+    state.employeeList.value = await UserAPI.getEmployees();
   }
 
   @override

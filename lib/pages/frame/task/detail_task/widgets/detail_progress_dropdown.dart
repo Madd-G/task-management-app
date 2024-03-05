@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:konek_mobile/common/apis/apis.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
+import 'package:konek_mobile/common/store/store.dart';
 import 'package:konek_mobile/common/style/style.dart';
 import 'package:konek_mobile/common/utils/utils.dart';
 import 'package:konek_mobile/common/widgets/widgets.dart';
@@ -50,7 +51,10 @@ class DetailProgressDropdown extends GetView<DetailTaskController> {
                 Task task = Task();
                 task.id = controller.state.task.id;
                 task.progress = val;
+                task.updater = UserStore.to.profile.id;
+                task.isRead = false;
                 TaskAPI.updateTaskProgress(params: task);
+                TaskAPI.updateTaskIsRead(params: task);
               },
             ),
           ),
