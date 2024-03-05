@@ -34,15 +34,19 @@ class AddTaskPage extends GetView<AddTaskController> {
               task.progress = 0;
               task.priority = controller.priority.value;
               controller.addTask(task);
-             if (controller.fcmToken?.value != '') {
-               NotificationEntity notification = NotificationEntity();
-               NotificationDetail notificationDetail = NotificationDetail(
-                   title: "owner", body: controller.nameController.text);
-               notification = NotificationEntity(
-                   notification: notificationDetail, token: '');
-               notification.token = controller.fcmToken?.value;
-               TaskAPI.sendNotification(notification: notification);
-             }
+              print(
+                  'controller.fcmToken?.value: ${controller.fcmToken?.value}');
+              print(
+                  'controller.fcmToken?.value type; ${controller.fcmToken?.value.runtimeType}');
+              if (controller.fcmToken?.value != '') {
+                NotificationEntity notification = NotificationEntity();
+                NotificationDetail notificationDetail = NotificationDetail(
+                    title: "owner", body: controller.nameController.text);
+                notification = NotificationEntity(
+                    notification: notificationDetail, token: '');
+                notification.token = controller.fcmToken?.value;
+                TaskAPI.sendNotification(notification: notification);
+              }
             },
             child: const Text('SAVE'),
           )

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:konek_mobile/common/apis/apis.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
@@ -28,7 +27,6 @@ class ProfileController extends GetxController {
   }
 
   goLogout() async {
-    await GoogleSignIn().signOut();
     await UserStore.to.onLogout();
   }
 
