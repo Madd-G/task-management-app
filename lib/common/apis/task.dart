@@ -49,6 +49,25 @@ class TaskAPI {
     );
   }
 
+  static void updateTaskDeadline({
+    Task? params,
+  }) async {
+    await HttpUtil().post(
+      'updateTaskDeadline',
+      data: params?.toJsonDeadline(),
+    );
+  }
+
+  static void addTaskMessage({
+    Task? params,
+  }) async {
+    print('params?.toJsonMessage(): ${params?.toJsonMessage()}');
+    await HttpUtil().post(
+      'addTaskMessage',
+      data: params?.toJsonMessage(),
+    );
+  }
+
   static void deleteTask({
     required String docId,
   }) async {

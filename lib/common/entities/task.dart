@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:konek_mobile/common/utils/format_date_time.dart';
 
 class Task {
   String? id;
@@ -17,6 +18,8 @@ class Task {
   DateTime? updatedAt;
   bool? isRead;
   String? updater;
+  List<Message>? messages;
+  Message? message;
 
   Task({
     this.id,
@@ -35,6 +38,8 @@ class Task {
     this.updatedAt,
     this.isRead,
     this.updater,
+    this.messages,
+    this.message,
   });
 
   Map<String, dynamic> toJson() {
@@ -44,15 +49,15 @@ class Task {
       'category': category,
       'weight': weight,
       'description': description,
-      'start_date': _formatDateTime(startDate),
-      'end_date': _formatDateTime(endDate),
+      'start_date': FormatDateTime.formatDateTime(startDate),
+      'end_date': FormatDateTime.formatDateTime(endDate),
       'status': status,
       'assignee': assignee,
       'target': target,
       'progress': progress,
       'priority': priority,
-      'created_at': _formatDateTime(createdAt),
-      'updated_at': _formatDateTime(updatedAt),
+      'created_at': FormatDateTime.formatDateTime(createdAt),
+      'updated_at': FormatDateTime.formatDateTime(updatedAt),
       'is_read': isRead,
       'updater': updater,
     };
@@ -82,6 +87,22 @@ class Task {
     };
   }
 
+  Map<String, dynamic> toJsonDeadline() {
+    return {
+      'id': id,
+      'end_date': endDate,
+      'updater': updater,
+    };
+  }
+
+  Map<String, dynamic> toJsonMessage() {
+    return {
+      'id': id,
+      'messages': message,
+      'updater': updater,
+    };
+  }
+
   Map<String, dynamic> toJsonIsRead() {
     return {
       'id': id,
@@ -91,6 +112,15 @@ class Task {
 
   factory Task.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    List<dynamic> messagesData = data['messages'] ?? [];
+
+    List<Message> messages = messagesData.map((messageData) {
+      return Message(
+        message: messageData['message'],
+        sender: messageData['sender'] ?? '',
+        time: (messageData['time'] as Timestamp).toDate(),
+      );
+    }).toList();
     return Task(
       id: data['id'],
       name: data['name'] ?? '',
@@ -108,6 +138,7 @@ class Task {
       updatedAt: (data['updated_at'] as Timestamp).toDate(),
       isRead: data['is_read'],
       updater: data['updater'],
+      messages: messages,
     );
   }
 
@@ -118,13 +149,29 @@ class Task {
         'status: $status, assignee: $assignee, target: $target, progress: $progress, '
         'priority: $priority, createdAt: $createdAt, updatedAt: $updatedAt, isRead: $isRead, updater: $updater)';
   }
+}
 
-  static Map<String, dynamic> _formatDateTime(DateTime? dateTime) =>
-      dateTime != null
-          ? {
-              "_seconds": dateTime.millisecondsSinceEpoch ~/ 1000,
-              "_nanoseconds":
-                  (dateTime.microsecondsSinceEpoch % 1000000) * 1000,
-            }
-          : {};
+class Message {
+  String? message;
+  String? sender;
+  DateTime? time;
+
+  Message({this.message, this.sender, this.time});
+
+  factory Message.fromMap(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    return Message(
+      message: data['message'],
+      sender: data['sender'] ?? '',
+      time: (data['time'] as Timestamp).toDate(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'message': message,
+      'sender': sender,
+      // 'time': FormatDateTime.formatDateTime(time),
+    };
+  }
 }

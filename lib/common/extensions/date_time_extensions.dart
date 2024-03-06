@@ -22,6 +22,27 @@ extension DateExtension on DateTime {
     return '$day $month $year';
   }
 
+  /// 12 May
+  String toDateWithoutYear() {
+    String day = this.day.toString().padLeft(2, '0');
+    List<String> months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+    String month = months[this.month - 1];
+    return '$day $month';
+  }
+
   /// 12:00
   String toTime() {
     String hour = this.hour.toString().padLeft(2, '0');
