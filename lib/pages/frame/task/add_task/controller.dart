@@ -1,9 +1,13 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:konek_mobile/common/apis/apis.dart';
-import 'package:konek_mobile/common/entities/entities.dart';
+import 'package:konek_mobile/common/entities/task.dart' as task;
+import 'package:konek_mobile/common/extensions/extensions.dart';
 import 'index.dart';
+import 'dart:io';
 
 class AddTaskController extends GetxController {
   final AddTaskState state = AddTaskState();
@@ -11,14 +15,19 @@ class AddTaskController extends GetxController {
   final weightController = TextEditingController();
   final descriptionController = TextEditingController();
   final addCompanyFormKey = GlobalKey<FormState>();
+  File? photo;
+  XFile? imageFile;
+  final ImagePicker _picker = ImagePicker();
   RxString status = 'To Do'.obs;
   RxString priority = 'Low'.obs;
   RxString category = 'Category'.obs;
   RxString employeeName = 'Assignee'.obs;
   RxString? fcmToken = ''.obs;
+  RxString imageUrl = ''.obs;
   RxString employeeRole = ''.obs;
   Rx<DateTime>? startDate = DateTime.now().obs;
   Rx<DateTime>? endDate = DateTime.now().obs;
+  RxString imageName = ''.obs;
 
   @override
   void onInit() {
@@ -30,15 +39,7 @@ class AddTaskController extends GetxController {
     state.employeeList.value = await UserAPI.getEmployees();
   }
 
-  @override
-  void onClose() {
-    nameController.dispose();
-    weightController.dispose();
-    descriptionController.dispose();
-    super.onClose();
-  }
-
-  void addTask(Task product) {
+  void addTask(task.Task product) {
     TaskAPI.addTask(params: product);
     Get.back();
   }
@@ -60,5 +61,56 @@ class AddTaskController extends GetxController {
         update();
       },
     );
+  }
+
+  Future imgFromCamera() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.camera);
+    imageFile = pickedFile;
+    imageName.value = imageFile!.name.fileName;
+  }
+
+
+  Future imgFromGallery() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+    imageFile = pickedFile;
+    imageName.value = imageFile!.name;
+  }
+
+  Future<UploadTask?> uploadFile(XFile? file, String id) async {
+    if (file == null) {
+      return null;
+    }
+
+    Reference ref = FirebaseStorage.instance
+        .ref()
+        .child('image')
+        .child('/$id.jpg');
+
+    final metadata = SettableMetadata(
+      contentType: 'image/jpeg',
+      customMetadata: {'picked-file-path': file.path},
+    );
+
+    UploadTask uploadTask = ref.putFile(File(file.path), metadata);
+
+    await uploadTask.whenComplete(() async {
+      String url = await ref.getDownloadURL();
+      print('url: $url');
+      imageUrl.value = url;
+      print('imageUrl.value: ${imageUrl.value}');
+      Get.back();
+    });
+
+    return uploadTask;
+  }
+
+  @override
+  void onClose() {
+    nameController.dispose();
+    weightController.dispose();
+    descriptionController.dispose();
+    super.onClose();
   }
 }

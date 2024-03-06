@@ -7,6 +7,7 @@ Widget netImageCached(
   double height = 48,
   EdgeInsetsGeometry? margin,
   BoxFit? fit = BoxFit.cover,
+  double radius = 100,
 }) {
   return CachedNetworkImage(
     imageUrl: url,
@@ -15,7 +16,7 @@ Widget netImageCached(
       width: width,
       margin: margin,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(100)),
+        borderRadius: BorderRadius.all(Radius.circular(radius)),
         image: DecorationImage(
           image: imageProvider,
           fit: fit,

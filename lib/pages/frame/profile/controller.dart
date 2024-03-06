@@ -8,7 +8,6 @@ import 'package:konek_mobile/common/apis/apis.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/store/store.dart';
 import 'index.dart';
-import 'dart:io' as io;
 
 class ProfileController extends GetxController {
   ProfileController();
@@ -63,7 +62,7 @@ class ProfileController extends GetxController {
       customMetadata: {'picked-file-path': file.path},
     );
 
-    UploadTask uploadTask = ref.putFile(io.File(file.path), metadata);
+    UploadTask uploadTask = ref.putFile(File(file.path), metadata);
 
     await uploadTask.whenComplete(() async {
       String url = await ref.getDownloadURL();

@@ -20,6 +20,7 @@ class Task {
   String? updater;
   List<Message>? messages;
   Message? message;
+  String? imageUrl;
 
   Task({
     this.id,
@@ -40,6 +41,7 @@ class Task {
     this.updater,
     this.messages,
     this.message,
+    this.imageUrl,
   });
 
   Map<String, dynamic> toJson() {
@@ -60,6 +62,7 @@ class Task {
       'updated_at': FormatDateTime.formatDateTime(updatedAt),
       'is_read': isRead,
       'updater': updater,
+      'image_url': imageUrl
     };
   }
 
@@ -137,8 +140,9 @@ class Task {
       createdAt: (data['created_at'] as Timestamp).toDate(),
       updatedAt: (data['updated_at'] as Timestamp).toDate(),
       isRead: data['is_read'],
-      updater: data['updater'],
+      updater: data['updater'] ?? '',
       messages: messages,
+      imageUrl: data['image_url'] ?? '',
     );
   }
 
@@ -147,7 +151,8 @@ class Task {
     return 'Task(id: $id, name: $name, category: $category, weight: $weight, '
         'description: $description, startDate: $startDate, endDate: $endDate, '
         'status: $status, assignee: $assignee, target: $target, progress: $progress, '
-        'priority: $priority, createdAt: $createdAt, updatedAt: $updatedAt, isRead: $isRead, updater: $updater)';
+        'priority: $priority, createdAt: $createdAt, updatedAt: $updatedAt, '
+        'isRead: $isRead, updater: $updater, imageUrl: $imageUrl)';
   }
 }
 
@@ -171,7 +176,6 @@ class Message {
     return {
       'message': message,
       'sender': sender,
-      // 'time': FormatDateTime.formatDateTime(time),
     };
   }
 }

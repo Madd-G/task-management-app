@@ -6,6 +6,7 @@ import 'package:konek_mobile/common/extensions/extensions.dart';
 import 'package:konek_mobile/common/store/store.dart';
 import 'package:konek_mobile/common/style/color.dart';
 import 'package:konek_mobile/common/utils/utils.dart';
+import 'package:konek_mobile/common/widgets/cached_image.dart';
 import 'package:konek_mobile/common/widgets/rounded_container.dart';
 import 'package:konek_mobile/pages/frame/task/detail_task/controller.dart';
 import 'package:konek_mobile/pages/frame/task/detail_task/widgets/widgets.dart';
@@ -52,6 +53,10 @@ class _DetailBodyState extends State<DetailBody> {
                 'Description',
                 style: CustomTextStyle.text3ExtraLargeSemiBold,
               ),
+              const SizedBox(height: 10.0),
+              if (widget.data.imageUrl! != '')
+                netImageCached(widget.data.imageUrl!, radius: 0.0),
+              const SizedBox(height: 10.0),
               Text(
                 widget.data.description!,
                 style: CustomTextStyle.textLargeRegular,
@@ -91,7 +96,10 @@ class _DetailBodyState extends State<DetailBody> {
                   },
                   child: const RoundedContainer(
                       containerColor: AppColor.borderColor,
-                      child: Icon(Icons.add, size: 12.0,))),
+                      child: Icon(
+                        Icons.add,
+                        size: 12.0,
+                      ))),
             ],
           ),
           const SizedBox(height: 5.0),

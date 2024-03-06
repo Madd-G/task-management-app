@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:konek_mobile/common/apis/apis.dart';
-import 'package:konek_mobile/common/entities/notification.dart';
-import 'package:uuid/uuid.dart';
-import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/widgets/widgets.dart';
 
 import 'index.dart';
@@ -13,42 +9,10 @@ class AddTaskPage extends GetView<AddTaskController> {
 
   @override
   Widget build(BuildContext context) {
-    const Uuid uuid = Uuid();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Task'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              if (controller.addCompanyFormKey.currentState!.validate()) {
-                Task task = Task();
-                task.id = uuid.v8();
-                task.name = controller.nameController.text;
-                task.category = controller.category.value;
-                task.weight = num.parse(controller.weightController.text);
-                task.status = controller.status.value;
-                task.startDate = controller.startDate?.value;
-                task.endDate = controller.endDate?.value;
-                task.assignee = controller.employeeName.value;
-                task.target = controller.employeeRole.value;
-                task.description = controller.descriptionController.text;
-                task.progress = 0;
-                task.priority = controller.priority.value;
-                controller.addTask(task);
-                if (controller.fcmToken?.value != '') {
-                  NotificationEntity notification = NotificationEntity();
-                  NotificationDetail notificationDetail = NotificationDetail(
-                      title: "owner", body: controller.nameController.text);
-                  notification = NotificationEntity(
-                      notification: notificationDetail, token: '');
-                  notification.token = controller.fcmToken?.value;
-                  TaskAPI.sendNotification(notification: notification);
-                }
-              }
-            },
-            child: const Text('SAVE'),
-          )
-        ],
+        actions: const [SaveButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -73,6 +37,31 @@ class AddTaskPage extends GetView<AddTaskController> {
                   hintText: 'Description',
                   keyboardType: TextInputType.text,
                   maxLines: 10,
+                ),
+                const SizedBox(height: 15.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: Row(
+                        children: [
+                          const Text('image: '),
+                          Obx(() => Expanded(
+                                  child: Text(
+                                controller.imageName.value,
+                                maxLines: 2,
+                              ))),
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _showPicker(context);
+                      },
+                      child: const Icon(Icons.camera_alt),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 15.0),
                 CustomTextField(
@@ -105,6 +94,35 @@ class AddTaskPage extends GetView<AddTaskController> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text('Gallery'),
+                  onTap: () {
+                    controller.imgFromGallery();
+                    Navigator.pop(bc);
+                  }),
+              ListTile(
+                leading: const Icon(Icons.photo_camera),
+                title: const Text('Camera'),
+                onTap: () {
+                  controller.imgFromCamera();
+                  Navigator.pop(bc);
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
