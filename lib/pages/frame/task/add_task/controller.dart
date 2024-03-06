@@ -97,9 +97,7 @@ class AddTaskController extends GetxController {
 
     await uploadTask.whenComplete(() async {
       String url = await ref.getDownloadURL();
-      print('url: $url');
       imageUrl.value = url;
-      print('imageUrl.value: ${imageUrl.value}');
       Get.back();
     });
 

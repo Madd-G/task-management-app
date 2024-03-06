@@ -31,11 +31,6 @@ class UserStore extends GetxController {
     }
   }
 
-  Future<void> setToken(String value) async {
-    await StorageService.to.setString(STORAGE_USER_TOKEN_KEY, value);
-    token = value;
-  }
-
   Future<String> getProfile() async {
     if (token.isEmpty) return "";
     // var result = await UserAPI.profile();
@@ -48,7 +43,6 @@ class UserStore extends GetxController {
     _isLogin.value = true;
     StorageService.to.setString(STORAGE_USER_PROFILE_KEY, jsonEncode(profile));
     _profile(profile);
-    // setToken(profile.accessToken!);
   }
 
   Future<void> onLogout() async {

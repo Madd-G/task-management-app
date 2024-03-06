@@ -5,7 +5,6 @@ class TaskAPI {
   static void addTask({
     Task? params,
   }) async {
-    print('addTask ${params?.toJson()}');
     await HttpUtil().post(
       'addTask',
       data: params?.toJson(),
@@ -42,7 +41,6 @@ class TaskAPI {
   static void updateTaskIsRead({
     Task? params,
   }) async {
-    print('params?.toJsonIsRead(): ${params?.toJsonIsRead()}');
     await HttpUtil().post(
       'updateTaskIsRead',
       data: params?.toJsonIsRead(),
@@ -61,7 +59,6 @@ class TaskAPI {
   static void addTaskMessage({
     Task? params,
   }) async {
-    print('params?.toJsonMessage(): ${params?.toJsonMessage()}');
     await HttpUtil().post(
       'addTaskMessage',
       data: params?.toJsonMessage(),

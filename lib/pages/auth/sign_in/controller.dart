@@ -36,12 +36,19 @@ class SignInController extends GetxController {
   }
 
   updateDeviceToken() async {
-    String? token = await _firebaseMessaging.getToken();
+    String? fcmToken = await _firebaseMessaging.getToken();
     String id = state.id.value;
-
+    var currentUser = UserStore.to.profile;
     UserEntity user = UserEntity();
     user.id = id;
-    user.token = token;
+    user.createdAt = currentUser.createdAt;
+    user.updatedAt = currentUser.updatedAt;
+    user.role = currentUser.role;
+    user.username = currentUser.username;
+    user.email = currentUser.email;
+    user.token = currentUser.email;
+    user.fcmToken = fcmToken;
     UserAPI.updateDeviceToken(params: user);
+    UserStore.to.saveProfile(user);
   }
 }

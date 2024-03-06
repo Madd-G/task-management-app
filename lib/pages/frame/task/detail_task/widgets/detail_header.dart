@@ -7,8 +7,9 @@ import 'package:konek_mobile/common/store/store.dart';
 import 'package:konek_mobile/common/style/style.dart';
 import 'package:konek_mobile/common/utils/utils.dart';
 import 'package:konek_mobile/common/widgets/widgets.dart';
+import 'package:konek_mobile/pages/frame/task/detail_task/controller.dart';
 
-class DetailHeader extends StatelessWidget {
+class DetailHeader extends GetView<DetailTaskController> {
   const DetailHeader({super.key, required this.data});
 
   final Task data;
@@ -16,42 +17,6 @@ class DetailHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    Future<void> showAlertDialog() async {
-      return showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Delete Task'),
-            backgroundColor: Colors.white,
-            content: const SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text('Are you sure want to delete task?'),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Cancel'),
-                onPressed: () {
-                  Get.back();
-                },
-              ),
-              TextButton(
-                child: const Text('Yes'),
-                onPressed: () {
-                  TaskAPI.deleteTask(docId: data.id!);
-                  Get.back();
-                  Get.back();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -86,7 +51,7 @@ class DetailHeader extends StatelessWidget {
                         ),
                         if (UserStore.to.profile.role == "owner")
                           GestureDetector(
-                            onTap: showAlertDialog,
+                            onTap: () => controller.showAlertDialog(context),
                             child: RoundedContainer(
                               radius: 10.0,
                               containerColor: AppColor.baseWhite,
@@ -126,10 +91,27 @@ class DetailHeader extends StatelessWidget {
                           style: CustomTextStyle.textRegularSemiBold,
                         ),
                         const SizedBox(width: 10.0),
-                        Text(
-                          '(${DateTime.now().differenceDate(data.endDate!)} left)',
-                          style: CustomTextStyle.textRegular,
-                        ),
+                        Obx(() {
+                          if (controller.timerText.value == '01:00:00') {
+                            if (UserStore.to.profile.token != '') {
+                              NotificationEntity notification =
+                                  NotificationEntity();
+                              NotificationDetail notificationDetail =
+                                  NotificationDetail(
+                                      title: "owner", body: data.name!);
+                              notification = NotificationEntity(
+                                  notification: notificationDetail);
+                              notification.token =
+                                  UserStore.to.profile.fcmToken;
+                              TaskAPI.sendNotification(
+                                  notification: notification);
+                            }
+                          }
+                          return Text(
+                            controller.timerText.value,
+                            style: CustomTextStyle.textRegular,
+                          );
+                        }),
                       ],
                     ),
                     if (UserStore.to.profile.role == "owner")

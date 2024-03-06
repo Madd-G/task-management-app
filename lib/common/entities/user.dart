@@ -7,6 +7,7 @@ class UserEntity {
   DateTime? updatedAt;
   String? password;
   String? token;
+  String? fcmToken;
 
   UserEntity({
     this.id,
@@ -17,6 +18,7 @@ class UserEntity {
     this.updatedAt,
     this.password,
     this.token,
+    this.fcmToken,
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class UserEntity {
       createdAt: _parseDateTime(json['createdAt']),
       updatedAt: _parseDateTime(json['updatedAt']),
       token: json["token"],
+      fcmToken: json["fcmToken"],
     );
   }
 
@@ -47,7 +50,7 @@ class UserEntity {
 
   Map<String, dynamic> toJsonUpdateDeviceToken() => {
         "id": id,
-        "token": token,
+        "fcmToken": fcmToken,
       };
 
   Map<String, dynamic> toJsonDeleteDeviceToken() => {
@@ -61,34 +64,18 @@ class UserEntity {
       "password": password,
       "email": email,
       "role": role,
-      "createdAt": _formatDateTime(createdAt),
-      "updatedAt": _formatDateTime(updatedAt),
+      "createdAt": _formatDateTime(createdAt!),
+      "updatedAt": _formatDateTime(updatedAt!),
       "token": token,
+      "fcmToken": fcmToken,
     };
   }
 
-  static DateTime? _parseDateTime(dynamic dateTime) {
-    if (dateTime == null) {
-      return null;
-    }
-
-    if (dateTime is Map<String, dynamic> &&
-        dateTime.containsKey('_seconds') &&
-        dateTime['_seconds'] is int) {
-      return DateTime.fromMillisecondsSinceEpoch(
-        (dateTime['_seconds'] as int) * 1000,
-      );
-    }
-
-    return null;
+  static String _formatDateTime(DateTime dateTime) {
+    return dateTime.toIso8601String();
   }
 
-  static Map<String, dynamic> _formatDateTime(DateTime? dateTime) =>
-      dateTime != null
-          ? {
-              "_seconds": dateTime.millisecondsSinceEpoch ~/ 1000,
-              "_nanoseconds":
-                  (dateTime.microsecondsSinceEpoch % 1000000) * 1000,
-            }
-          : {};
+  static DateTime _parseDateTime(dynamic json) {
+    return DateTime.parse(json);
+  }
 }

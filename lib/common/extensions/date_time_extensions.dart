@@ -59,9 +59,9 @@ extension DateExtension on DateTime {
     int minutes = diff.inMinutes.remainder(60);
 
     if (days > 0) {
-      return '${days}d ${hours}h';
+      return '${days}d ${hours}h left';
     } else {
-      return '${hours}h ${minutes}m';
+      return '${hours}h ${minutes}m ago';
     }
   }
 }
