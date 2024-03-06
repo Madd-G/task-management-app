@@ -26,12 +26,14 @@ class SignInController extends GetxController {
         maskType: EasyLoadingMaskType.clear,
         dismissOnTap: true,
       );
-      var result = await UserAPI.login(params: user);
+      UserEntity result = await UserAPI.login(params: user);
+      print('result: ${result}');
       await UserStore.to.saveProfile(result);
+      print('offline user: ${UserStore.to.profile.toJson()}');
       Get.offAllNamed(AppRoutes.BOTTOM_NAV_BAR);
       EasyLoading.dismiss();
-    // ignore: empty_catches
     } catch (error) {
+      rethrow;
     }
   }
 
@@ -46,7 +48,7 @@ class SignInController extends GetxController {
     user.role = currentUser.role;
     user.username = currentUser.username;
     user.email = currentUser.email;
-    user.token = currentUser.email;
+    user.token = currentUser.token;
     user.fcmToken = fcmToken;
     UserAPI.updateDeviceToken(params: user);
     UserStore.to.saveProfile(user);

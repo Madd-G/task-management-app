@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
+import 'package:konek_mobile/common/store/store.dart';
 import 'package:konek_mobile/common/style/style.dart';
 import 'package:konek_mobile/common/widgets/widgets.dart';
 import 'package:konek_mobile/pages/frame/profile/controller.dart';
@@ -39,6 +40,7 @@ class BusinessLogo extends GetView<ProfileController> {
             height: 150.0,
           ),
         ),
+        if (UserStore.to.profile.role == 'owner')
         Positioned(
           bottom: 50.0,
           right: 0.0,

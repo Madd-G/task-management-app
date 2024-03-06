@@ -54,10 +54,12 @@ class AddAssigneeDropdown extends GetView<AddTaskController> {
                   ),
                 ),
                 onChanged: (UserEntity? val) {
+                  print('choose employee:');
+                  print('val: ${val?.toJson()}');
                   controller.employeeName.value = val!.username!;
                   controller.employeeRole.value = val.role!;
-                  if (val.token != null) {
-                    controller.fcmToken?.value = val.token!;
+                  if (val.fcmToken != null) {
+                    controller.fcmToken?.value = val.fcmToken!;
                   }
                 },
               ),

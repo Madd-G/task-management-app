@@ -10,7 +10,6 @@ class UserStore extends GetxController {
 
   final _isLogin = false.obs;
 
-  /// login / access token and sent down for authorization
   String token = '';
   final _profile = UserEntity().obs;
 
@@ -31,22 +30,15 @@ class UserStore extends GetxController {
     }
   }
 
-  Future<String> getProfile() async {
-    if (token.isEmpty) return "";
-    // var result = await UserAPI.profile();
-    // _profile(result);
-    // _isLogin.value = true;
-    return StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
-  }
-
   Future<void> saveProfile(UserEntity profile) async {
     _isLogin.value = true;
-    StorageService.to.setString(STORAGE_USER_PROFILE_KEY, jsonEncode(profile));
+    print('profile.toJson(): ${profile.toJson()}');
+    final profileJson = profile.toJson();
+    StorageService.to.setString(STORAGE_USER_PROFILE_KEY, jsonEncode(profileJson));
     _profile(profile);
   }
 
   Future<void> onLogout() async {
-    // if (_isLogin.value) await UserAPI.logout();
     await StorageService.to.remove(STORAGE_USER_TOKEN_KEY);
     await StorageService.to.remove(STORAGE_USER_PROFILE_KEY);
     _isLogin.value = false;

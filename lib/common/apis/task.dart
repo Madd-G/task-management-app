@@ -74,6 +74,7 @@ class TaskAPI {
   }
 
   static void sendNotification({NotificationEntity? notification}) async {
+    print('notification?.toJson(): ${notification?.toJson()}');
     await HttpUtil().post(
       'sendNotification',
       data: notification?.toJson(),

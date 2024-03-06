@@ -32,6 +32,7 @@ class DetailTaskController extends GetxController {
 
   @override
   void onInit() {
+    print('current user: ${UserStore.to.profile.toJson()}');
     state.task = Get.arguments;
     deadline = state.task.endDate!.obs;
     progress = state.task.progress.obs;
