@@ -55,6 +55,8 @@ class _BusinessNameState extends State<BusinessName> {
         return AlertDialog(
           backgroundColor: Colors.white,
           title: const Text('Update Business Name'),
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           content: TextField(
             autofocus: true,
             controller: nameController,

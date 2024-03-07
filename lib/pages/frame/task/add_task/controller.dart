@@ -22,6 +22,7 @@ class AddTaskController extends GetxController {
   RxString priority = 'Low'.obs;
   RxString category = 'Category'.obs;
   RxString employeeName = 'Assignee'.obs;
+  RxString employeeId = ''.obs;
   RxString? fcmToken = ''.obs;
   RxString imageUrl = ''.obs;
   RxString employeeRole = ''.obs;
@@ -67,6 +68,9 @@ class AddTaskController extends GetxController {
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.camera);
     imageFile = pickedFile;
+    if (imageFile != null) {
+      imageName.value = imageFile!.name;
+    }
     imageName.value = imageFile!.name.fileName;
   }
 
@@ -75,7 +79,9 @@ class AddTaskController extends GetxController {
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);
     imageFile = pickedFile;
-    imageName.value = imageFile!.name;
+    if (imageFile != null) {
+      imageName.value = imageFile!.name;
+    }
   }
 
   Future<UploadTask?> uploadFile(XFile? file, String id) async {

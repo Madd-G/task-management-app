@@ -43,6 +43,7 @@ class _BusinessValueState extends State<BusinessValue> {
             : () {},
         child: Text(
           widget.data.businessValue!,
+          textAlign: TextAlign.justify,
         ),
       ),
     );
@@ -56,10 +57,13 @@ class _BusinessValueState extends State<BusinessValue> {
         return AlertDialog(
           backgroundColor: Colors.white,
           title: const Text('Update Business Value'),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           content: TextField(
             maxLines: 10,
             autofocus: true,
             controller: valueController,
+            textAlign: TextAlign.justify,
           ),
           actions: [
             TextButton(

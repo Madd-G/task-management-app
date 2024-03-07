@@ -8,15 +8,13 @@ import 'package:konek_mobile/common/widgets/widgets.dart';
 import 'detail_body.dart';
 
 class TaskComment extends StatelessWidget {
-  const TaskComment({
-    super.key,
-    required this.widget,
-  });
+  const TaskComment({super.key, required this.widget});
 
   final DetailBody widget;
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -39,18 +37,24 @@ class TaskComment extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        (message.sender == UserStore.to.profile.id)
+                        (message.sender == UserStore.to.profile.username)
                             ? 'You'
                             : message.sender!,
                         style: CustomTextStyle.textSmallSemiBold,
                       ),
                       Text(
-                          '${message.time!.toTime()} - ${message.time!.toDateWithoutYear()}',
+                          '${message.time!.toTime()} ${(DateTime.now().toDateWithoutYear() == message.time!.toDateWithoutYear()) ? '' : '- ${message.time!.toDateWithoutYear()}'}',
                           style: CustomTextStyle.textSmallSemiBold),
                     ],
                   ),
-                  Text(message.message!),
-                  const SizedBox(height: 5.0),
+                  (message.commentType == 'text')
+                      ? SizedBox(
+                          width: size.width * 0.71,
+                          child: Text(message.message!,
+                              textAlign: TextAlign.justify))
+                      : netImageCached(message.message!,
+                          radius: 0.0, height: 200.0, width: 200.0),
+                  const SizedBox(height: 15.0),
                 ],
               );
             },
@@ -61,4 +65,3 @@ class TaskComment extends StatelessWidget {
     );
   }
 }
-

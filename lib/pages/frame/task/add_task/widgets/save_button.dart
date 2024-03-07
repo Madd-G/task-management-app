@@ -25,6 +25,7 @@ class SaveButton extends GetView<AddTaskController> {
           task.startDate = controller.startDate?.value;
           task.endDate = controller.endDate?.value;
           task.assignee = controller.employeeName.value;
+          task.assigneeId = controller.employeeId.value;
           task.target = controller.employeeRole.value;
           task.description = controller.descriptionController.text;
           task.progress = 0;

@@ -56,6 +56,7 @@ class AddAssigneeDropdown extends GetView<AddTaskController> {
                 onChanged: (UserEntity? val) {
                   controller.employeeName.value = val!.username!;
                   controller.employeeRole.value = val.role!;
+                  controller.employeeId.value = val.id!;
                   if (val.fcmToken != null) {
                     controller.fcmToken?.value = val.fcmToken!;
                   }

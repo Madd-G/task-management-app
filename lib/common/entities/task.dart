@@ -11,6 +11,7 @@ class Task {
   DateTime? endDate;
   String? status;
   String? assignee;
+  String? assigneeId;
   String? target;
   num? progress;
   String? priority;
@@ -33,6 +34,7 @@ class Task {
     this.endDate,
     this.status,
     this.assignee,
+    this.assigneeId,
     this.target,
     this.progress,
     this.priority,
@@ -57,6 +59,7 @@ class Task {
       'end_date': FormatDateTime.formatDateTime(endDate),
       'status': status,
       'assignee': assignee,
+      'assignee_id': assigneeId,
       'target': target,
       'progress': progress,
       'priority': priority,
@@ -131,6 +134,7 @@ class Task {
       return Message(
         message: messageData['message'],
         sender: messageData['sender'] ?? '',
+        commentType: messageData['comment_type'] ?? '',
         time: (messageData['time'] as Timestamp).toDate(),
       );
     }).toList();
@@ -144,6 +148,7 @@ class Task {
         endDate: (data['end_date'] as Timestamp).toDate(),
         status: data['status'] ?? '',
         assignee: data['assignee'] ?? '',
+        assigneeId: data['assignee_id'] ?? '',
         target: data['target'] ?? '',
         progress: data['progress'] ?? 0,
         priority: data['priority'] ?? '',
@@ -160,7 +165,7 @@ class Task {
   String toString() {
     return 'Task(id: $id, name: $name, category: $category, weight: $weight, '
         'description: $description, startDate: $startDate, endDate: $endDate, '
-        'status: $status, assignee: $assignee, target: $target, progress: $progress, '
+        'status: $status, assignee: $assignee, assigneeId: $assigneeId, target: $target, progress: $progress, '
         'priority: $priority, createdAt: $createdAt, updatedAt: $updatedAt, '
         'isRead: $isRead, updater: $updater, imageUrl: $imageUrl, '
         'isNotificationSent: $isNotificationSent)';
@@ -170,23 +175,30 @@ class Task {
 class Message {
   String? message;
   String? sender;
+  String? commentType;
   DateTime? time;
 
-  Message({this.message, this.sender, this.time});
+  Message({
+    this.message,
+    this.sender,
+    this.commentType,
+    this.time,
+  });
 
-  factory Message.fromMap(DocumentSnapshot snapshot) {
-    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-    return Message(
-      message: data['message'],
-      sender: data['sender'] ?? '',
-      time: (data['time'] as Timestamp).toDate(),
-    );
-  }
-
+// factory Message.fromMap(DocumentSnapshot snapshot) {
+//   Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+//   return Message(
+//     message: data['message'],
+//     sender: data['sender'] ?? '',
+//     time: (data['time'] as Timestamp).toDate(),
+//   );
+// }
+//
   Map<String, dynamic> toJson() {
     return {
       'message': message,
       'sender': sender,
+      'comment_type': commentType,
     };
   }
 }

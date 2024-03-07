@@ -72,6 +72,8 @@ class ProfileBadge extends GetView<ProfileController> {
         return AlertDialog(
           backgroundColor: Colors.white,
           title: const Text('Add business sector'),
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           content: TextField(
             autofocus: true,
             controller: controller.sectorController,

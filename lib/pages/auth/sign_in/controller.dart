@@ -30,6 +30,8 @@ class SignInController extends GetxController {
       );
       UserEntity result = await UserAPI.login(params: user);
       await UserStore.to.saveProfile(result);
+      debugPrint('UserStore: ${UserStore.to.profile.toJson()}');
+      UserAPI.updateDeviceToken(params: user);
       Get.offAllNamed(AppRoutes.BOTTOM_NAV_BAR);
       EasyLoading.dismiss();
     } catch (error) {
@@ -37,11 +39,11 @@ class SignInController extends GetxController {
     }
   }
 
-  updateDeviceToken() async {
-    String? fcmToken = await _firebaseMessaging.getToken();
-    UserEntity user = UserStore.to.profile;
-    user.fcmToken = fcmToken;
-    UserAPI.updateDeviceToken(params: user);
-    UserStore.to.saveProfile(user);
-  }
+  // updateDeviceToken() async {
+  //   String? fcmToken = await _firebaseMessaging.getToken();
+  //   UserEntity user = UserStore.to.profile;
+  //   user.fcmToken = fcmToken;
+  //   UserAPI.updateDeviceToken(params: user);
+  //   UserStore.to.saveProfile(user);
+  // }
 }

@@ -85,7 +85,7 @@ class FirebaseMessagingHandler {
         ),
       ),
       "${message.notification?.body}", // title/name
-      "owner",
+      "${message.notification?.title}", // title/name
       duration: const Duration(seconds: 30),
       isDismissible: false,
       mainButton: TextButton(

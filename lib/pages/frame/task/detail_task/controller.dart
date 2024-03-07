@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 import 'dart:async';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart' as fs;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:konek_mobile/common/apis/apis.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
+import 'package:konek_mobile/common/extensions/extensions.dart';
 import 'package:konek_mobile/common/store/store.dart';
 import 'index.dart';
 
@@ -20,6 +24,12 @@ class DetailTaskController extends GetxController {
 
   RxString timerText = ''.obs;
   late StreamSubscription<DateTime> _subscription;
+
+  File? photo;
+  XFile? imageFile;
+  final ImagePicker _picker = ImagePicker();
+  RxString imageUrl = ''.obs;
+  RxString imageName = ''.obs;
 
   DetailTaskController() {
     _subscription =
@@ -63,6 +73,8 @@ class DetailTaskController extends GetxController {
         return AlertDialog(
           title: const Text('Delete Task'),
           backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -89,6 +101,44 @@ class DetailTaskController extends GetxController {
         );
       },
     );
+  }
+
+  Future imgFromCamera() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.camera);
+    imageFile = pickedFile;
+    imageName.value = imageFile!.name.fileName;
+  }
+
+  Future imgFromGallery() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+    imageFile = pickedFile;
+    imageName.value = imageFile!.name;
+  }
+
+  Future<fs.UploadTask?> uploadFile(XFile? file, String id) async {
+    if (file == null) {
+      return null;
+    }
+
+    fs.Reference ref =
+        fs.FirebaseStorage.instance.ref().child('comment').child('/$id.jpg');
+
+    final metadata = fs.SettableMetadata(
+      contentType: 'image/jpeg',
+      customMetadata: {'picked-file-path': file.path},
+    );
+
+    fs.UploadTask uploadTask = ref.putFile(File(file.path), metadata);
+
+    await uploadTask.whenComplete(() async {
+      String url = await ref.getDownloadURL();
+      imageUrl.value = url;
+      Get.back();
+    });
+
+    return uploadTask;
   }
 
   @override
