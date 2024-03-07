@@ -1,13 +1,11 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
-import 'dart:convert';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:konek_mobile/firebase_options.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseMessagingHandler {
   FirebaseMessagingHandler._();
@@ -19,7 +17,7 @@ class FirebaseMessagingHandler {
     importance: Importance.defaultImportance,
     enableLights: true,
     playSound: true,
-    // sound: RawResourceAndroidNotificationSound('alert'),
+    sound: RawResourceAndroidNotificationSound('alert'),
     enableVibration: true,
   );
 
@@ -47,7 +45,7 @@ class FirebaseMessagingHandler {
       }
 
       var initializationSettingsAndroid =
-          const AndroidInitializationSettings("ic_launcher");
+          const AndroidInitializationSettings("@mipmap/ic_launcher");
       var darwinInitializationSettings = const DarwinInitializationSettings();
       var initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid,
@@ -128,28 +126,5 @@ class FirebaseMessagingHandler {
     debugPrint("message data: ${message.data}");
     debugPrint("message data: $message");
     debugPrint("message data: ${message.notification}");
-
-    if (message.data["call_type"] != null) {
-      if (message.data["call_type"] == "cancel") {
-        FirebaseMessagingHandler.flutterLocalNotificationsPlugin.cancelAll();
-        //  await setCallVoiceOrVideo(false);
-        var prefs = await SharedPreferences.getInstance();
-        await prefs.setString("CallVoiceOrVideo", "");
-      }
-      if (message.data["call_type"] == "voice" ||
-          message.data["call_type"] == "video") {
-        var data = {
-          "to_token": message.data["token"],
-          "to_name": message.data["name"],
-          "to_avatar": message.data["avatar"],
-          "doc_id": message.data["doc_id"] ?? "",
-          "call_type": message.data["call_type"],
-          "expire_time": DateTime.now().toString(),
-        };
-        debugPrint('$data');
-        var _prefs = await SharedPreferences.getInstance();
-        await _prefs.setString("CallVoiceOrVideo", jsonEncode(data));
-      }
-    }
   }
 }

@@ -18,12 +18,13 @@ class Global {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    firebaseInit().whenComplete(() {
-      FirebaseMessagingHandler.config();
-    });
+
     await Get.putAsync<StorageService>(() => StorageService().init());
     Get.put<ConfigStore>(ConfigStore());
     Get.put<UserStore>(UserStore());
+    firebaseInit().whenComplete(() {
+      FirebaseMessagingHandler.config();
+    });
   }
 
   static void setSystemUi() {
@@ -47,7 +48,7 @@ Future firebaseInit() async {
   if (GetPlatform.isAndroid) {
     FirebaseMessagingHandler.flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()!
+            AndroidFlutterLocalNotificationsPlugin>()!
         .createNotificationChannel(FirebaseMessagingHandler.channelMessage);
   }
 }

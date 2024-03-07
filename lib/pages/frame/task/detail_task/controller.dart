@@ -32,7 +32,6 @@ class DetailTaskController extends GetxController {
 
   @override
   void onInit() {
-    print('current user: ${UserStore.to.profile.toJson()}');
     state.task = Get.arguments;
     deadline = state.task.endDate!.obs;
     progress = state.task.progress.obs;
@@ -43,6 +42,7 @@ class DetailTaskController extends GetxController {
     if (state.task.updater != UserStore.to.profile.id) {
       TaskAPI.updateTaskIsRead(params: Task(id: state.task.id, isRead: true));
     }
+    debugPrint('current user: ${UserStore.to.profile.toJson()}');
     super.onInit();
   }
 

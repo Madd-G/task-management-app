@@ -1,5 +1,3 @@
-import 'package:konek_mobile/common/utils/utils.dart';
-
 class UserEntity {
   String? id;
   String? username;
@@ -60,34 +58,16 @@ class UserEntity {
       };
 
   Map<String, dynamic> toJson() {
-    print('createdAt: $createdAt');
-    print('updatedAt: $updatedAt');
-    print('role: $role');
     return {
       "id": id,
       "username": username,
       "password": password,
       "email": email,
-      "role": role,
-      "createdAt": FormatDateTime.formatDateTime(createdAt!),
-      "updatedAt": FormatDateTime.formatDateTime(updatedAt!),
+      "role": role ?? '',
       "token": token,
       "fcmToken": fcmToken,
     };
   }
-
-  // static String _formatDateTime(DateTime dateTime) {
-  //   return dateTime.toIso8601String();
-  // }
-
-  static Map<String, dynamic> _formatDateTime(DateTime? dateTime) =>
-      dateTime != null
-          ? {
-        "_seconds": dateTime.millisecondsSinceEpoch ~/ 1000,
-        "_nanoseconds":
-        (dateTime.microsecondsSinceEpoch % 1000000) * 1000,
-      }
-          : {};
 
   static DateTime? _parseDateTime(dynamic dateTime) {
     if (dateTime == null) {

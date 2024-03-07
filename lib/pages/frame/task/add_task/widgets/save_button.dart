@@ -13,7 +13,6 @@ class SaveButton extends GetView<AddTaskController> {
     const Uuid uuid = Uuid();
     return TextButton(
       onPressed: () async {
-        print('save button');
         String id = uuid.v8();
         if (controller.addCompanyFormKey.currentState!.validate()) {
           await controller.uploadFile(controller.imageFile, id);
@@ -33,11 +32,8 @@ class SaveButton extends GetView<AddTaskController> {
           task.imageUrl = controller.imageUrl.value;
           task.updater = controller.employeeName.value;
           controller.addTask(task);
-          print('...trying to send notification');
-          print('controller.fcmToken?.value: ${controller.fcmToken?.value}');
-          print('controller.fcmToken?.value type: ${controller.fcmToken?.value.runtimeType}');
-          if (controller.fcmToken?.value != '' || controller.fcmToken?.value != null) {
-            print('....triggered');
+          if (controller.fcmToken?.value != '') {
+            debugPrint('....triggered');
             NotificationEntity notification = NotificationEntity();
             NotificationDetail notificationDetail = NotificationDetail(
                 title: "owner", body: controller.nameController.text);
@@ -46,7 +42,7 @@ class SaveButton extends GetView<AddTaskController> {
             notification.token = controller.fcmToken?.value;
             TaskAPI.sendNotification(notification: notification);
           } else {
-            print('....not triggered');
+            debugPrint('....not triggered');
           }
         }
       },

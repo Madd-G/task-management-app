@@ -27,9 +27,7 @@ class SignInController extends GetxController {
         dismissOnTap: true,
       );
       UserEntity result = await UserAPI.login(params: user);
-      print('result: ${result}');
       await UserStore.to.saveProfile(result);
-      print('offline user: ${UserStore.to.profile.toJson()}');
       Get.offAllNamed(AppRoutes.BOTTOM_NAV_BAR);
       EasyLoading.dismiss();
     } catch (error) {
@@ -39,16 +37,7 @@ class SignInController extends GetxController {
 
   updateDeviceToken() async {
     String? fcmToken = await _firebaseMessaging.getToken();
-    String id = state.id.value;
-    var currentUser = UserStore.to.profile;
-    UserEntity user = UserEntity();
-    user.id = id;
-    user.createdAt = currentUser.createdAt;
-    user.updatedAt = currentUser.updatedAt;
-    user.role = currentUser.role;
-    user.username = currentUser.username;
-    user.email = currentUser.email;
-    user.token = currentUser.token;
+    UserEntity user = UserStore.to.profile;
     user.fcmToken = fcmToken;
     UserAPI.updateDeviceToken(params: user);
     UserStore.to.saveProfile(user);
