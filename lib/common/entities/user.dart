@@ -43,9 +43,11 @@ class UserEntity {
     }
   }
 
+  // To login
   Map<String, dynamic> toJsonRequest() => {
         "id": id,
         "password": password,
+        "fcmToken": fcmToken,
       };
 
   Map<String, dynamic> toJsonUpdateDeviceToken() => {

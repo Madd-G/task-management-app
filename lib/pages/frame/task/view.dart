@@ -97,7 +97,7 @@ class TaskPage extends GetView<TaskController> {
                     DateTime.now().isBefore(task.endDate!) &&
                     task.isNotificationSent == false &&
                     UserStore.to.profile.role != 'owner' &&
-                    task.status == 'done') {
+                    task.status != 'done') {
                   debugPrint('...triggered');
                   if (UserStore.to.profile.token != '') {
                     NotificationEntity notification = NotificationEntity();
@@ -105,7 +105,7 @@ class TaskPage extends GetView<TaskController> {
                         NotificationDetail(title: "owner", body: task.name!);
                     notification =
                         NotificationEntity(notification: notificationDetail);
-                    notification.token = controller.fcmToken.value;
+                    notification.token = UserStore.to.profile.fcmToken;
                     TaskAPI.sendNotification(notification: notification);
                     TaskAPI.updateTaskIsNotificationSent(
                         params: Task(id: task.id, isNotificationSent: true));

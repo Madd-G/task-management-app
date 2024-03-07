@@ -13,12 +13,14 @@ class SignInController extends GetxController {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   login() async {
+    String? fcmToken = await _firebaseMessaging.getToken();
     String id = state.id.value;
     String password = state.password.value;
 
     UserEntity user = UserEntity();
     user.id = id;
     user.password = password;
+    user.fcmToken = fcmToken;
 
     try {
       EasyLoading.show(
