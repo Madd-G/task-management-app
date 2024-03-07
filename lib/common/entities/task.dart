@@ -21,6 +21,7 @@ class Task {
   List<Message>? messages;
   Message? message;
   String? imageUrl;
+  bool? isNotificationSent;
 
   Task({
     this.id,
@@ -42,6 +43,7 @@ class Task {
     this.messages,
     this.message,
     this.imageUrl,
+    this.isNotificationSent,
   });
 
   Map<String, dynamic> toJson() {
@@ -62,7 +64,8 @@ class Task {
       'updated_at': FormatDateTime.formatDateTime(updatedAt),
       'is_read': isRead,
       'updater': updater,
-      'image_url': imageUrl
+      'image_url': imageUrl,
+      'is_notification_sent': isNotificationSent,
     };
   }
 
@@ -113,6 +116,13 @@ class Task {
     };
   }
 
+  Map<String, dynamic> toJsonNotificationSent() {
+    return {
+      'id': id,
+      'is_notification_sent': isNotificationSent,
+    };
+  }
+
   factory Task.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     List<dynamic> messagesData = data['messages'] ?? [];
@@ -125,25 +135,25 @@ class Task {
       );
     }).toList();
     return Task(
-      id: data['id'],
-      name: data['name'] ?? '',
-      category: data['category'] ?? '',
-      weight: data['weight'] ?? 0,
-      description: data['description'] ?? '',
-      startDate: (data['start_date'] as Timestamp).toDate(),
-      endDate: (data['end_date'] as Timestamp).toDate(),
-      status: data['status'] ?? '',
-      assignee: data['assignee'] ?? '',
-      target: data['target'] ?? '',
-      progress: data['progress'] ?? 0,
-      priority: data['priority'] ?? '',
-      createdAt: (data['created_at'] as Timestamp).toDate(),
-      updatedAt: (data['updated_at'] as Timestamp).toDate(),
-      isRead: data['is_read'],
-      updater: data['updater'] ?? '',
-      messages: messages,
-      imageUrl: data['image_url'] ?? '',
-    );
+        id: data['id'],
+        name: data['name'] ?? '',
+        category: data['category'] ?? '',
+        weight: data['weight'] ?? 0,
+        description: data['description'] ?? '',
+        startDate: (data['start_date'] as Timestamp).toDate(),
+        endDate: (data['end_date'] as Timestamp).toDate(),
+        status: data['status'] ?? '',
+        assignee: data['assignee'] ?? '',
+        target: data['target'] ?? '',
+        progress: data['progress'] ?? 0,
+        priority: data['priority'] ?? '',
+        createdAt: (data['created_at'] as Timestamp).toDate(),
+        updatedAt: (data['updated_at'] as Timestamp).toDate(),
+        isRead: data['is_read'],
+        updater: data['updater'] ?? '',
+        messages: messages,
+        imageUrl: data['image_url'] ?? '',
+        isNotificationSent: data['is_notification_sent']);
   }
 
   @override
@@ -152,7 +162,8 @@ class Task {
         'description: $description, startDate: $startDate, endDate: $endDate, '
         'status: $status, assignee: $assignee, target: $target, progress: $progress, '
         'priority: $priority, createdAt: $createdAt, updatedAt: $updatedAt, '
-        'isRead: $isRead, updater: $updater, imageUrl: $imageUrl)';
+        'isRead: $isRead, updater: $updater, imageUrl: $imageUrl, '
+        'isNotificationSent: $isNotificationSent)';
   }
 }
 

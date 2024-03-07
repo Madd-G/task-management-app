@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:konek_mobile/common/apis/apis.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
-import 'package:konek_mobile/common/extensions/extensions.dart';
 import 'package:konek_mobile/common/store/store.dart';
 import 'package:konek_mobile/common/style/color.dart';
 import 'package:konek_mobile/common/utils/utils.dart';
-import 'package:konek_mobile/common/widgets/cached_image.dart';
 import 'package:konek_mobile/common/widgets/rounded_container.dart';
 import 'package:konek_mobile/pages/frame/task/detail_task/controller.dart';
 import 'package:konek_mobile/pages/frame/task/detail_task/widgets/widgets.dart';
@@ -54,8 +52,7 @@ class _DetailBodyState extends State<DetailBody> {
                 style: CustomTextStyle.text3ExtraLargeSemiBold,
               ),
               const SizedBox(height: 10.0),
-              if (widget.data.imageUrl! != '')
-                netImageCached(widget.data.imageUrl!, radius: 0.0),
+              if (widget.data.imageUrl! != '') TaskImage(widget: widget),
               const SizedBox(height: 10.0),
               Text(
                 widget.data.description!,
@@ -103,59 +100,8 @@ class _DetailBodyState extends State<DetailBody> {
             ],
           ),
           const SizedBox(height: 5.0),
-          if (widget.data.messages!.isNotEmpty)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RoundedContainer(
-                  boxConstraints: const BoxConstraints(maxHeight: 400.0),
-                  radius: 10.0,
-                  borderColor: Colors.black,
-                  containerColor: AppColor.borderColor,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(8.0),
-                    scrollDirection: Axis.vertical,
-                    itemCount: widget.data.messages!.length,
-                    itemBuilder: (context, index) {
-                      var message = widget.data.messages![index];
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                (message.sender == UserStore.to.profile.id)
-                                    ? 'You'
-                                    : message.sender!,
-                                style: CustomTextStyle.textSmallSemiBold,
-                              ),
-                              Text(
-                                  '${message.time!.toTime()} - ${message.time!.toDateWithoutYear()}',
-                                  style: CustomTextStyle.textSmallSemiBold),
-                            ],
-                          ),
-                          Text(message.message!),
-                          const SizedBox(height: 5.0),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 20.0),
-              ],
-            ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                  "Created at: ${widget.data.createdAt!.toTime()} - ${widget.data.createdAt?.toDate()}"),
-              const SizedBox(height: 10.0),
-              Text(
-                  "Last update at: ${widget.data.updatedAt!.toTime()} - ${widget.data.updatedAt?.toDate()}")
-            ],
-          ),
+          if (widget.data.messages!.isNotEmpty) TaskComment(widget: widget),
+          TaskCreateUpdate(widget: widget),
         ],
       ),
     );
@@ -168,7 +114,7 @@ class _DetailBodyState extends State<DetailBody> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: const Text('Update Business Name'),
+          title: const Text('Add Comment'),
           content: TextField(
             autofocus: true,
             controller: messageController,

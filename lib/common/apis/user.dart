@@ -47,4 +47,12 @@ class UserAPI {
       throw Exception('Failed to load employees');
     }
   }
+
+  static Future<String> getEmployeeFCMToken(String id) async {
+    var requestBody = {"doc_id": id};
+    var response =
+        await HttpUtil().post('getEmployeeFCMToken', data: requestBody);
+    var fcmToken = response['fcmToken'];
+    return fcmToken;
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:konek_mobile/common/apis/apis.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/routes/routes.dart';
 import 'package:konek_mobile/common/store/store.dart';
@@ -88,6 +89,30 @@ class TaskPage extends GetView<TaskController> {
                 child: Text('No data available'),
               );
             } else {
+              // ignore: avoid_function_literals_in_foreach_calls
+              tasks.forEach((task) {
+                if (task.endDate != null &&
+                    DateTime.now().isAfter(
+                        task.endDate!.subtract(const Duration(hours: 1))) &&
+                    DateTime.now().isBefore(task.endDate!) &&
+                    task.isNotificationSent == false &&
+                    UserStore.to.profile.role != 'owner' &&
+                    task.status == 'done') {
+                  debugPrint('...triggered');
+                  if (UserStore.to.profile.token != '') {
+                    NotificationEntity notification = NotificationEntity();
+                    NotificationDetail notificationDetail =
+                        NotificationDetail(title: "owner", body: task.name!);
+                    notification =
+                        NotificationEntity(notification: notificationDetail);
+                    notification.token = controller.fcmToken.value;
+                    TaskAPI.sendNotification(notification: notification);
+                    TaskAPI.updateTaskIsNotificationSent(
+                        params: Task(id: task.id, isNotificationSent: true));
+                  }
+                }
+              });
+
               return Padding(
                 padding: const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0),
                 child: ListView.builder(

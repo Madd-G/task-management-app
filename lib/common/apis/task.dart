@@ -47,6 +47,15 @@ class TaskAPI {
     );
   }
 
+  static void updateTaskIsNotificationSent({
+    Task? params,
+  }) async {
+    await HttpUtil().post(
+      'updateTaskIsNotificationSent',
+      data: params?.toJsonNotificationSent(),
+    );
+  }
+
   static void updateTaskDeadline({
     Task? params,
   }) async {

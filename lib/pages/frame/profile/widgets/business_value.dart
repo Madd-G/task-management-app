@@ -55,7 +55,7 @@ class _BusinessValueState extends State<BusinessValue> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: const Text('Update Business Name'),
+          title: const Text('Update Business Value'),
           content: TextField(
             maxLines: 10,
             autofocus: true,

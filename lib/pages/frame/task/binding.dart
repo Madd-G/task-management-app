@@ -5,6 +5,6 @@ import 'controller.dart';
 class TaskBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<TaskController>(() => TaskController());
+    Get.put<TaskController>(TaskController());
   }
 }

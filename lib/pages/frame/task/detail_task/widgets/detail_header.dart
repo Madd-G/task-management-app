@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:konek_mobile/common/apis/apis.dart';
 import 'package:konek_mobile/common/entities/entities.dart';
 import 'package:konek_mobile/common/extensions/extensions.dart';
 import 'package:konek_mobile/common/store/store.dart';
@@ -92,21 +91,6 @@ class DetailHeader extends GetView<DetailTaskController> {
                         ),
                         const SizedBox(width: 10.0),
                         Obx(() {
-                          if (controller.timerText.value == '01:00:00') {
-                            if (UserStore.to.profile.token != '') {
-                              NotificationEntity notification =
-                                  NotificationEntity();
-                              NotificationDetail notificationDetail =
-                                  NotificationDetail(
-                                      title: "owner", body: data.name!);
-                              notification = NotificationEntity(
-                                  notification: notificationDetail);
-                              notification.token =
-                                  UserStore.to.profile.fcmToken;
-                              TaskAPI.sendNotification(
-                                  notification: notification);
-                            }
-                          }
                           return Text(
                             controller.timerText.value,
                             style: CustomTextStyle.textRegular,

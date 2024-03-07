@@ -31,6 +31,7 @@ class SaveButton extends GetView<AddTaskController> {
           task.priority = controller.priority.value;
           task.imageUrl = controller.imageUrl.value;
           task.updater = controller.employeeName.value;
+          task.isNotificationSent = false;
           controller.addTask(task);
           if (controller.fcmToken?.value != '') {
             debugPrint('....triggered');
