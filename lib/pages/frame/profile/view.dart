@@ -42,16 +42,8 @@ class ProfilePage extends GetView<ProfileController> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: IconButton(
-                          onPressed: () {
-                            controller.goLogout();
-                            controller.deleteDeviceToken();
-                          },
-                          icon: const Icon(Icons.logout)),
-                    ),
-                   BusinessLogo(data: data),
+                    const LogoutButton(),
+                    BusinessLogo(data: data),
                     const SizedBox(height: 20.0),
                     BusinessName(data: data),
                     const SizedBox(height: 20.0),
@@ -67,6 +59,5 @@ class ProfilePage extends GetView<ProfileController> {
       ),
     );
   }
-
 }
 

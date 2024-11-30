@@ -89,25 +89,17 @@ class _DetailBodyState extends State<DetailBody> {
               const Text('comment:'),
               const SizedBox(width: 5.0),
               GestureDetector(
-                  onTap: () {
-                    openDialog(context, controller, 'text');
-                  },
-                  child: const RoundedContainer(
-                      containerColor: AppColor.borderColor,
-                      child: Icon(
-                        Icons.add,
-                        size: 12.0,
-                      ))),
-              // const SizedBox(width: 5.0),
-              // GestureDetector(
-              //     onTap: () {
-              //       // openDialog(context, controller, 'image');
-              //       _showPicker(context, controller.state.task.id!);
-              //     },
-              //     child: const Icon(
-              //       Icons.camera_alt,
-              //       size: 15.0,
-              //     )),
+                onTap: () {
+                  openDialog(context, controller, 'text');
+                },
+                child: const RoundedContainer(
+                  containerColor: AppColor.borderColor,
+                  child: Icon(
+                    Icons.add,
+                    size: 12.0,
+                  ),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 5.0),

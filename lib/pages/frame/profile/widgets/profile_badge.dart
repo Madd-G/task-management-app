@@ -64,8 +64,7 @@ class ProfileBadge extends GetView<ProfileController> {
     );
   }
 
-  Future<String?> openDialog(
-      BuildContext context, ProfileController controller) {
+  Future<String?> openDialog(BuildContext context, ProfileController controller) {
     return showDialog<String>(
       context: context,
       builder: (context) {

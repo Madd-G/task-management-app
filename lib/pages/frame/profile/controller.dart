@@ -10,11 +10,11 @@ import 'package:konek_mobile/common/store/store.dart';
 import 'index.dart';
 
 class ProfileController extends GetxController {
-  ProfileController();
 
   final ProfileState state = ProfileState();
 
   late TextEditingController sectorController;
+
 
   File? photo;
   final ImagePicker _picker = ImagePicker();
